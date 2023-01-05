@@ -80,7 +80,8 @@ public class ClassParser {
 	
 	void getFirst(Class<?> cls, Classe temp) {
 		int mods = cls.getModifiers();
-		temp.setName(cls.getName());
+		temp.setName(cls.getSimpleName());
+//		System.out.println(cls.getSimpleName());
 		temp.setMod(Modifier.toString(mods));
 	}
 	

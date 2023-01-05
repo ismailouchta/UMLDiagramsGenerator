@@ -79,7 +79,7 @@ public class ClassParserFrame extends JFrame {
 
 	public void addStats(int nbrAttributes, int nbrMethods) {
 		scrollpane = new JScrollPane(draw);
-//		scrollpane.setPreferredSize(new Dimension(700, 500));
+		scrollpane.setPreferredSize(new Dimension(550, 700));
 		
 		content.add(scrollpane, BorderLayout.CENTER);
 		

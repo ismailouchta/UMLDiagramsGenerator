@@ -13,9 +13,10 @@ public class Entity extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel top, mid, bot;
-	Border blackline = BorderFactory.createLineBorder(Color.black);
+	private Border blackline = BorderFactory.createLineBorder(Color.black);
 
 	public Entity(String name) {
+		System.out.println(name);
 		top = new JPanel();
 		mid = new JPanel();
 		bot = new JPanel();
