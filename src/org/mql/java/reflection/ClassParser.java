@@ -114,12 +114,30 @@ public class ClassParser {
 			for (int i = 0; i < f.length; i++) {	
 				nbrAttributes++;
 				String attribute = "";
-				attribute += Modifier.toString(f[i].getModifiers());
-				attribute += " " + f[i].getType() + " " + f[i].getName();
-				
-				if (!Modifier.toString(f[i].getModifiers()).contains("private")) {
-					attributes.add(attribute);
+//				attribute += Modifier.toString(f[i].getModifiers());
+//				attribute += " " + f[i].getType() + " " + f[i].getName();
+				String modifier = Modifier.toString(f[i].getModifiers());
+				if (modifier.contains("private")) {
+					attribute += "-";
+				} else if (modifier.contains("protected")) {
+					attribute += "#";
+				} else if (modifier.contains("public")) {
+					attribute += "+";
 				}
+				
+//				System.out.println();
+				
+				attribute += f[i].getName();
+				attribute += " : " + f[i].getType().getSimpleName();
+				
+				if (modifier.contains("final")) {
+					attribute += " = "; // finish this one
+				}
+				
+//				if (!Modifier.toString(f[i].getModifiers()).contains("private")) {
+					attributes.add(attribute);
+					System.out.println(attribute);
+//				}
 				temp.setAttributes(attributes);
 			}
 		}
