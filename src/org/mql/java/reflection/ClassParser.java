@@ -8,6 +8,8 @@ import java.lang.reflect.Parameter;
 import java.util.Vector;
 
 import org.mql.java.models.Classe;
+import org.mql.java.models.Interface;
+import org.mql.java.testing.Type;
 import org.mql.java.ui.ClassParserFrame;
 
 public class ClassParser {
@@ -45,10 +47,20 @@ public class ClassParser {
 	public Classe getClasse() {
 		return temp;
 	}
+	
+	public Interface getInterface() {
+		return (Interface) temp;
+	}
+	
 	void draw(Classe cc) {
 //		frame = new ClassParserFrame();
 		temp = cc;
-		frame.addEntity(temp);
+		frame.addEntity(temp, Type.CLASS);
+	}
+	
+	void draw(Interface cc) {
+		temp = (Classe) cc;
+		frame.addEntity(temp, Type.INTERFACE);
 	}
 	
 	void show() {
@@ -67,6 +79,7 @@ public class ClassParser {
 		return cl;
 	}
 	
+	
 	void draw(Class<?> cls) {
 		
 		Class<?> herite[] = cls.getInterfaces();
@@ -74,7 +87,7 @@ public class ClassParser {
 		if (herite.length != 0) {
 				draw(herite[0]);
 				Classe s = extract(herite[0]);
-				frame.addEntity(s);
+				frame.addEntity(s, Type.CLASS);
 		}
 	}
 	
@@ -169,8 +182,6 @@ public class ClassParser {
     				constructor += "+";
 				}
 				
-				
-//				
 //				System.out.println(cls.getPackage().getName());
 				
 				

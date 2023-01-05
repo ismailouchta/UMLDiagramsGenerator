@@ -6,13 +6,14 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.mql.java.models.Classe;
+import org.mql.java.models.Interface;
 import org.mql.java.models.Package;
 import org.mql.java.models.Project;
 
 public class ProjectParser {
 	private Set<String> packs;
 //	protected String bruh;
-	private final String C = "ccc"; 
+//	private final String C = "ccc"; 
 
 	public ProjectParser(String src) {
 		packs = new HashSet<>();
@@ -28,16 +29,36 @@ public class ProjectParser {
 			
 			// if not empty add it later
 			Package pack = new Package(p);
-			Vector<Classe> classes = new Vector<Classe>(); 
+			Vector<Classe> classes = new Vector<Classe>();
+			Vector<Interface> interfaces = new Vector<Interface>(); //
 			
 			for ( File f : contents) {
 		    	  if (f.isFile()) {
+		    		  
 		    		  String className = f.getName().replace(".java", "");
-		    		  ClassParser classparser = new ClassParser(p + "." + className);
-		    		  classes.add(classparser.getClasse()); // add classe
-//		    		  classparser.draw(classparser.getClasse());
+
+		    		  // whats its type ?
+					try {
+						Class<?> cls = Class.forName(p + "." + className);
+						ClassParser classparser = new ClassParser(p + "." + className);
+						
+						if (cls.isInterface()) {
+							interfaces.add(classparser.getInterface()); // add classe
+						} else {
+							classes.add(classparser.getClasse());
+						}
+						
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+		    		  
+		    		  
+		    		  
+//		    		  ClassParser classparser = new ClassParser(p + "." + className);
+//		    		  classes.add(classparser.getClasse()); // add classe
 		    	  }
 			}
+			pack.setInterfaces(interfaces);
 			pack.setClasses(classes);
 			packages.add(pack);
 		}
@@ -52,14 +73,16 @@ public class ProjectParser {
 		ClassParser cp = new ClassParser();
 		for (Package p : packc) {
 			Vector<Classe> classes = p.getClasses();
+			Vector<Interface> interfaces = p.getInterfaces();
+			
 			for (Classe c : classes) {
 				cp.draw(c);				
 			}
+			for (Interface c : interfaces) {
+				cp.draw(c);		
+			}
 		}
 		cp.show();
-		
-		
-		
 		
 	}
 	

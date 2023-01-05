@@ -3,15 +3,17 @@ package org.mql.java.models;
 import java.util.List;
 import java.util.Vector;
 
-public class Classe {	
+public class Classe extends Interface {	
 	
-	private String mod, name;
-	private Vector<String> constructors, attributes, methods;
+//	private String mod, name;
+//	private Vector<String> constructors, attributes, methods;
+//
+//	private Class<?>[] interfaces;
+//	private Class<?>[] inheritence;
 
-	private Class<?>[] interfaces;
-	private Class<?>[] inheritence;
-
-	private Vector<Classe> innerClasses;
+//	private Vector<Classe> innerClasses;
+	
+	private Vector<String> constructors;
 	
 	public Classe() {
 	}

@@ -5,7 +5,7 @@ import java.util.Vector;
 public class Package {
 	private String name;
 	private Vector<Classe> classes;
-//	private Vector<Interface> interfaces;
+	private Vector<Interface> interfaces;
 
 	public Package(String name) {
 		this.name = name;
@@ -21,6 +21,14 @@ public class Package {
 
 	public String getName() {
 		return name;
+	}
+
+	public Vector<Interface> getInterfaces() {
+		return interfaces;
+	}
+
+	public void setInterfaces(Vector<Interface> interfaces) {
+		this.interfaces = interfaces;
 	}
 	
 }
