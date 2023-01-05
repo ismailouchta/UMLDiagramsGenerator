@@ -15,7 +15,7 @@ public class Entity extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel title, content, attribues, methods;
-	private Border blackline = BorderFactory.createLineBorder(Color.black);
+//	private Border blackline = BorderFactory.createLineBorder(Color.black);
 
 	public Entity(String name) {
 		

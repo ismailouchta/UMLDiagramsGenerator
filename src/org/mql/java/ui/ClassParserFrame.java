@@ -63,6 +63,7 @@ public class ClassParserFrame extends JFrame {
 	}
 	
 	private void config() {
+		setTitle("UML Diagrams Generator - Java Project");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 //		setSize(800, 800);

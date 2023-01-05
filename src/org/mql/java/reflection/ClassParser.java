@@ -127,7 +127,7 @@ public class ClassParser {
 				
 //				System.out.println();
 				
-				attribute += f[i].getName();
+				attribute += " " + f[i].getName();
 				attribute += " : " + f[i].getType().getSimpleName();
 				
 				if (modifier.contains("final")) {
@@ -136,7 +136,7 @@ public class ClassParser {
 				
 //				if (!Modifier.toString(f[i].getModifiers()).contains("private")) {
 					attributes.add(attribute);
-					System.out.println(attribute);
+//					System.out.println(attribute);
 //				}
 				temp.setAttributes(attributes);
 			}
@@ -166,26 +166,42 @@ public class ClassParser {
     		String method = "";
     		String modif = Modifier.toString(m[i].getModifiers());
     		
-    		if(!modif.contains("private")) {
+//    		if(!modif.contains("private")) {
     			
-    			if (modif.length() != 0) method += modif;
+    			if (modif.length() != 0) {
+    				if (modif.contains("private")) {
+    					method += "-";
+    				} else if (method.contains("protected")) {
+    					method += "#";
+    				} else if (method.contains("public")) {
+    					method += "+";
+    				} else {
+    					method += "+";
+    				}
+    			} else {
+					method += "+";
+				}
     			
-    			method += " " + m[i].getGenericReturnType().getTypeName();        			
+//    			method += " " + m[i].getGenericReturnType().getTypeName();
     			method += " " + m[i].getName() + "(";
     			
-    			Parameter p[] = m[i].getParameters();
-    			
-    			if (p.length != 0) {
-        			for (int j = 0; j < p.length; j++) {
-        				method += p[j].getParameterizedType().getTypeName();
-        				if (j < p.length-1) {
-        					method += ", ";
-        				}
-        			}
-    			}
+//    			Parameter p[] = m[i].getParameters();
+//    			if (p.length != 0) {
+//        			for (int j = 0; j < p.length; j++) {
+//        				method += p[j].getParameterizedType().getTypeName();        				
+//        				if (j < p.length-1) {
+//        					method += ", ";
+//        				}
+//        			}
+//    			}
     			method += ")";
+    			
+//    			method += " : " + m[i].getGenericReturnType().getTypeName();
+    			method += " : " + m[i].getReturnType().getSimpleName();
+    			
+    			
     			methodes.add(method);
-    		}
+//    		}
         }
         temp.setMethods(methodes);
 	}
