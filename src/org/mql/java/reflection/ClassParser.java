@@ -11,7 +11,7 @@ import org.mql.java.models.Classe;
 import org.mql.java.ui.ClassParserFrame;
 
 public class ClassParser {
-	private ClassParserFrame frame;
+	private ClassParserFrame frame = new ClassParserFrame();
 	private Classe temp;
 	private int nbrAttributes = 0;
 	private int nbrMethods = 0;
@@ -19,27 +19,40 @@ public class ClassParser {
 	public ClassParser() {
 	}
 	
-	public ClassParser(Class<?> c) {
-		
-		frame = new ClassParserFrame();
-		temp = extract(c);
-		temp.print();
-		frame.addEntity(temp);
-		frame.addStats(nbrAttributes, nbrMethods);
-	}
+//	public ClassParser(Class<?> c) {
+//		frame = new ClassParserFrame();
+//		temp = extract(c);
+////		temp.print();
+//		frame.addEntity(temp);
+//		frame.addStats(nbrAttributes, nbrMethods);
+//	}
 
 	public ClassParser(String className) {
 		try {
-			frame = new ClassParserFrame();
 			Class<?> cls = Class.forName(className);
 			draw(cls);
 			temp = extract(cls);
-			temp.print();
-			frame.addEntity(temp);
-			frame.addStats(nbrAttributes, nbrMethods);
+//			temp.print();
+			
+//			frame = new ClassParserFrame();
+//			frame.addEntity(temp);
+//			frame.addStats(nbrAttributes, nbrMethods);
 		} catch (Exception e) {
 			e.getMessage();
 		}
+	}
+	
+	public Classe getClasse() {
+		return temp;
+	}
+	void draw(Classe cc) {
+//		frame = new ClassParserFrame();
+		temp = cc;
+		frame.addEntity(temp);
+	}
+	
+	void show() {
+		frame.addStats(nbrAttributes, nbrMethods);	
 	}
 	
 	Classe extract(Class<?> cls) {
@@ -50,7 +63,7 @@ public class ClassParser {
 		getAttributes(cls, cl);
 		getConstructors(cls, cl);
 		getMethods(cls, cl);
-		getInnerClass(cls, cl);
+//		getInnerClass(cls, cl);
 		return cl;
 	}
 	
@@ -163,7 +176,7 @@ public class ClassParser {
 			new ClassParser(args[0]);
 		} else {
 //			new ClassParser(new RandomClass().getClass());
-//			new ClassParser("org.mql.java.models.Classe");
+			new ClassParser("org.mql.java.models.Classe");
 //			new ClassParser("java.util.LinkedHashSet");
 //			new ClassParser("java.util.List");
 //			new ClassParser("java.util.Vector");

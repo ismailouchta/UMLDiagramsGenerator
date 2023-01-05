@@ -12,14 +12,17 @@ import javax.swing.border.Border;
 public class Entity extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel top, bot;
+	private JPanel top, mid, bot;
 	Border blackline = BorderFactory.createLineBorder(Color.black);
 
 	public Entity(String name) {
-		top = new JPanel(); bot = new JPanel();
+		top = new JPanel();
+		mid = new JPanel();
+		bot = new JPanel();
+		
 		config();
 		top.add(new JLabel(name));
-		add(top); add(bot);
+		add(top); add(mid); add(bot); 
 	}
 	
 	public void addItem(String item) {
@@ -29,11 +32,20 @@ public class Entity extends JPanel {
 		bot.add(panel);
 	}
 	
+//	public void addAttributes() {
+//		
+//	}
+	
+	
+	// add attributes
+	// add methods
+	
 	void config() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		bot.setLayout(new BoxLayout(bot, BoxLayout.Y_AXIS));
 		top.setBorder(blackline);
 		bot.setBorder(blackline);
+		mid.setBorder(blackline);
 	}
 
 }

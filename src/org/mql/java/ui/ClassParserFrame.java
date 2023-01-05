@@ -65,7 +65,7 @@ public class ClassParserFrame extends JFrame {
 	private void config() {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(800, 800);
+//		setSize(800, 800);
 		pack();
 		setVisible(true);
 	}
@@ -79,8 +79,7 @@ public class ClassParserFrame extends JFrame {
 
 	public void addStats(int nbrAttributes, int nbrMethods) {
 		scrollpane = new JScrollPane(draw);
-		scrollpane.setPreferredSize(new Dimension(700, 500));
-//		scrollpane.setMaximumSize(new Dimension(900, 500));
+//		scrollpane.setPreferredSize(new Dimension(700, 500));
 		
 		content.add(scrollpane, BorderLayout.CENTER);
 		
