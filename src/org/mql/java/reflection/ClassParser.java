@@ -163,7 +163,8 @@ public class ClassParser {
 			new ClassParser(args[0]);
 		} else {
 //			new ClassParser(new RandomClass().getClass());
-			new ClassParser("java.util.LinkedHashSet");
+//			new ClassParser("org.mql.java.models.Classe");
+//			new ClassParser("java.util.LinkedHashSet");
 //			new ClassParser("java.util.List");
 //			new ClassParser("java.util.Vector");
 //			new ClassParser("java.lang.String");

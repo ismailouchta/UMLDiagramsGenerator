@@ -84,12 +84,12 @@ public class ClassParserFrame extends JFrame {
 		
 		content.add(scrollpane, BorderLayout.CENTER);
 		
-		stats.add(new JLabel("	"));
-		stats.add(new JLabel("	"));
-		stats.add(new JLabel("			Informations extraites"));
-		stats.add(new JLabel("			Nombre de propriétés : " + nbrAttributes));
-		stats.add(new JLabel("			nombre de méthodes : " + nbrMethods));
-		content.add(stats, BorderLayout.EAST);
+//		stats.add(new JLabel("	"));
+//		stats.add(new JLabel("	"));
+//		stats.add(new JLabel("			Informations extraites"));
+//		stats.add(new JLabel("			Nombre de propriétés : " + nbrAttributes));
+//		stats.add(new JLabel("			nombre de méthodes : " + nbrMethods));
+//		content.add(stats, BorderLayout.EAST);
 		
 		screen.add(content);
 		setContentPane(screen);
