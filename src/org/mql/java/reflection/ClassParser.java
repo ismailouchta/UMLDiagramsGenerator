@@ -146,10 +146,49 @@ public class ClassParser {
 	void getConstructors(Class<?> cls, Classe temp) {
 		Constructor<?> constructors[] = cls.getConstructors();
 		if (constructors.length != 0) {
-			Vector<String> constr = new Vector<String>();		
+			Vector<String> constr = new Vector<String>();
 			nbrMethods++;
-			for (int i = 0; i < constructors.length; i++) {				
-				constr.add(constructors[i].toString());
+			for (int i = 0; i < constructors.length; i++) {
+				
+//				constr.add(constructors[i].toString());
+				
+				String constructor = "";
+	    		String modif = Modifier.toString(constructors[i].getModifiers());
+//				System.out.println(Modifier.toString(constructors[i].getModifiers()));
+				if (modif.length() != 0) {
+    				if (modif.contains("private")) {
+    					constructor += "-";
+    				} else if (constructor.contains("protected")) {
+    					constructor += "#";
+    				} else if (constructor.contains("public")) {
+    					constructor += "+";
+    				} else {
+    					constructor += "+";
+    				}
+    			} else {
+    				constructor += "+";
+				}
+				
+				
+//				
+//				System.out.println(cls.getPackage().getName());
+				
+				
+				constructor += " "
+				+ constructors[i].getName().replace(cls.getPackage().getName()+".", "")
+				+ "(";
+    			
+//    			Parameter p[] = m[i].getParameters();
+//    			if (p.length != 0) {
+//        			for (int j = 0; j < p.length; j++) {
+//        				method += p[j].getParameterizedType().getTypeName();        				
+//        				if (j < p.length-1) {
+//        					method += ", ";
+//        				}
+//        			}
+//    			}
+				constructor += ")";
+				constr.add(constructor);
 			}
 			temp.setConstructors(constr);
 		}
