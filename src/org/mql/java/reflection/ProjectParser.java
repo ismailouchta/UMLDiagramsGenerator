@@ -61,7 +61,6 @@ public class ProjectParser {
 		
 		
 		
-		
 	}
 	
     public static void listOfPackage(String directoryName, Set<String> pack) {

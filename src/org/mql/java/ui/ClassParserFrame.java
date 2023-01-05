@@ -34,7 +34,7 @@ public class ClassParserFrame extends JFrame {
 		List<String> attributes = temp.getAttributes();
 		if (attributes != null) {
 			for (int i = 0; i < attributes.size(); i++) {
-				entity.addItem(attributes.get(i));
+				entity.addAttribute(attributes.get(i));
 			}
 		}
 		
