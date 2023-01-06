@@ -6,8 +6,9 @@ public class Project {
 	private String name;
 	private Vector<Package> packages;
 
-	public Project(String name) {
+	public Project(String name, Vector<Package> packages) {
 		this.name = name;
+		this.packages = packages;
 	}
 
 	public String getName() {
@@ -18,8 +19,8 @@ public class Project {
 		return packages;
 	}
 
-	public void setPackages(Vector<Package> packages) {
-		this.packages = packages;
-	}
+//	public void setPackages(Vector<Package> packages) {
+//		this.packages = packages;
+//	}
 
 }

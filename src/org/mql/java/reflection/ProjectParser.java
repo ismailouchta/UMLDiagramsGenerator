@@ -17,7 +17,7 @@ public class ProjectParser {
 		packs = new HashSet<>();
 		listOfPackage(src,packs);
 		
-		Project project = new Project("Random Prject");
+//		Project project = new Project("Random Prject");
 		
 		Vector<Package> packages = new Vector<Package>();
 		
@@ -26,9 +26,9 @@ public class ProjectParser {
 			File[] contents = directory.listFiles();
 			
 			// if not empty add it later
-			Package pack = new Package(p);
+//			Package pack = new Package(p);
 			Vector<Classe> classes = new Vector<Classe>();
-			Vector<Interface> interfaces = new Vector<Interface>(); //
+			Vector<Interface> interfaces = new Vector<Interface>();
 			
 			for ( File f : contents) {
 		    	  if (f.isFile()) {
@@ -56,11 +56,14 @@ public class ProjectParser {
 //		    		  classes.add(classparser.getClasse()); // add classe
 		    	  }
 			}
-			pack.setInterfaces(interfaces);
-			pack.setClasses(classes);
+//			pack.setInterfaces(interfaces);
+//			pack.setClasses(classes);
+			Package pack = new Package(p, classes, interfaces);
 			packages.add(pack);
+			
 		}
-		project.setPackages(packages);
+		Project project = new Project("Random Prject", packages);
+//		project.setPackages(packages);
 		
 		
 		
