@@ -7,17 +7,19 @@ public class Package {
 	private Vector<Classe> classes;
 	private Vector<Interface> interfaces;
 
-	public Package(String name) {
+	public Package(String name, Vector<Classe> classes, Vector<Interface> interfaces) {
 		this.name = name;
+		this.classes = classes;
+		this.interfaces = interfaces;
 	}
 
 	public Vector<Classe> getClasses() {
 		return classes;
 	}
 
-	public void setClasses(Vector<Classe> classes) {
-		this.classes = classes;
-	}
+//	public void setClasses(Vector<Classe> classes) {
+//		this.classes = classes;
+//	}
 
 	public String getName() {
 		return name;
@@ -27,8 +29,8 @@ public class Package {
 		return interfaces;
 	}
 
-	public void setInterfaces(Vector<Interface> interfaces) {
-		this.interfaces = interfaces;
-	}
+//	public void setInterfaces(Vector<Interface> interfaces) {
+//		this.interfaces = interfaces;
+//	}
 	
 }
