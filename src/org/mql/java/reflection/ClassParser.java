@@ -81,13 +81,23 @@ public class ClassParser {
 	
 	void draw(Class<?> cls) {
 		
-		Class<?> herite[] = cls.getInterfaces();
+//		Class<?> herite[] = cls.getInterfaces();
+//		Class<?> herite = cls.getSuperclass();
+
+//		if (herite != null) {	
+//			System.out.println(herite);
+//			Classe s = extract(herite);
+//			if (s != null && s.getName() != null) {
+//				
+//				frame.addEntity(s, Type.CLASS);
+//			}
+//		}
 		
-		if (herite.length != 0) {
-				draw(herite[0]);
-				Classe s = extract(herite[0]);
-				frame.addEntity(s, Type.CLASS);
-		}
+//		if (herite.length != 0) {
+//				draw(herite[0]);
+//				Classe s = extract(herite[0]);
+//				frame.addEntity(s, Type.CLASS);
+//		}
 	}
 	
 	void getFirst(Class<?> cls, Classe temp) {
@@ -112,6 +122,16 @@ public class ClassParser {
 	
 	void getInheritence(Class<?> cls, Classe temp) {
 		temp.setInheritence(cls.getClasses());
+		
+		if (cls.getSuperclass() != null) {
+			if (!cls.getSuperclass().getSimpleName().contains("Object")) {				
+			System.out.println(
+					cls.getSimpleName() + " inherits from " +
+					cls.getSuperclass().getSimpleName()
+					);
+			}
+		}
+		
 	}
 	
 	void getInterfaces(Class<?> cls, Classe temp) {

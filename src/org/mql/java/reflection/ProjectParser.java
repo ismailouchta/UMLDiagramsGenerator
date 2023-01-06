@@ -80,7 +80,7 @@ public class ProjectParser {
 				cp.draw(c);				
 			}
 			for (Interface c : interfaces) {
-				cp.draw(c);		
+				cp.draw(c);
 			}
 		}
 		cp.show();
