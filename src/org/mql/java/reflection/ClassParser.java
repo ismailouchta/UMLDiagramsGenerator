@@ -70,7 +70,9 @@ public class ClassParser {
 		Classe cl = new Classe();
 		getFirst(cls, cl);
 		getInheritence(cls, cl);
-		getInterfaces(cls, cl);
+		
+		if (!cls.isInterface()) getInterfaces(cls, cl);
+		
 		getAttributes(cls, cl);
 		getConstructors(cls, cl);
 		getMethods(cls, cl);
@@ -143,10 +145,16 @@ public class ClassParser {
 		}
 	}
 	
-//				System.out.println(cls.getSimpleName()+" inherits from "+cls.getSuperclass().getSimpleName());
-	
 	void getInterfaces(Class<?> cls, Classe temp) {
-//		temp.setInterfaces(cls.getInterfaces());
+		// only classes go through this
+		Class<?> extractedInterfaces[] = cls.getInterfaces();
+		Vector<String> interfaces = new Vector<String>();
+		if (extractedInterfaces.length != 0) {
+			for (int i = 0; i < extractedInterfaces.length; i++) {
+				interfaces.add(extractedInterfaces[i].getSimpleName());
+			}
+		}
+		temp.setInterfaces(interfaces);
 	}
 	
 	void getAttributes(Class<?> cls, Classe temp) {
