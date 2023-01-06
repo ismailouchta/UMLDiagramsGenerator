@@ -11,14 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import org.mql.java.models.Classe;
-import org.mql.java.testing.Type;
 
 public class ClassParserFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel screen, content, draw, stats;
 	private JScrollPane scrollpane;
-	private int nbrUnits = 0;
 	
 	public ClassParserFrame() {
 		screen = new JPanel();		
@@ -31,7 +29,6 @@ public class ClassParserFrame extends JFrame {
 	public void addEntity(Classe temp, org.mql.java.testing.Type type) {
 		
 		Entity entity = new Entity(temp.getName(), type);
-//		entity.setName();
 
 		List<String> attributes = temp.getAttributes();
 		if (attributes != null) {
@@ -53,15 +50,8 @@ public class ClassParserFrame extends JFrame {
 				entity.addMethod(methods.get(i));
 			}
 		}
-		
-//		if (nbrUnits != 0) {
-//			JPanel arrowP = new JPanel();
-//			arrowP.add(new JLabel("↑"));
-//			draw.add(arrowP);
-//		}
-		
+
 		draw.add(entity);
-		nbrUnits++;
 	}
 	
 	private void config() {
@@ -84,16 +74,11 @@ public class ClassParserFrame extends JFrame {
 		scrollpane = new JScrollPane(draw);
 //		scrollpane.setPreferredSize(new Dimension(550, 700));
 		scrollpane.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize()); // full screen
+		scrollpane.getVerticalScrollBar().setUnitIncrement(16);
+		scrollpane.getHorizontalScrollBar().setUnitIncrement(16);
 		
 		content.add(scrollpane, BorderLayout.CENTER);
-		
-//		stats.add(new JLabel("	"));
-//		stats.add(new JLabel("	"));
-//		stats.add(new JLabel("			Informations extraites"));
-//		stats.add(new JLabel("			Nombre de propriétés : " + nbrAttributes));
-//		stats.add(new JLabel("			nombre de méthodes : " + nbrMethods));
-//		content.add(stats, BorderLayout.EAST);
-		
+				
 		screen.add(content);
 		setContentPane(screen);
 		config();

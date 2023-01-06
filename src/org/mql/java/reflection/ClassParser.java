@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
 import java.util.Vector;
 
 import org.mql.java.models.Classe;
@@ -145,6 +144,18 @@ public class ClassParser {
 				
 				if (modifier.contains("final")) {
 					attribute += " = "; // finish this one
+					f[i].setAccessible(true);
+			        try {
+//						int privateHidenInt = (Integer)f[i].get(null);
+						attribute += f[i].get(null);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				if (modifier.contains("static")) {
+					attribute += "st4tic";
+					
 				}
 				
 //				if (!Modifier.toString(f[i].getModifiers()).contains("private")) {

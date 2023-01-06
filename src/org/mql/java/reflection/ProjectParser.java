@@ -12,8 +12,6 @@ import org.mql.java.models.Project;
 
 public class ProjectParser {
 	private Set<String> packs;
-//	protected String bruh;
-//	private final String C = "ccc"; 
 
 	public ProjectParser(String src) {
 		packs = new HashSet<>();
