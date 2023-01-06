@@ -1,5 +1,5 @@
 package org.mql.java.testing;
 
-public interface AnotherInterface extends RandomInterface {
+public interface AnotherInterface extends RandomInterface, randomClass {
 	
 }

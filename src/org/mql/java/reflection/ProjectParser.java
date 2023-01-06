@@ -77,11 +77,18 @@ public class ProjectParser {
 			Vector<Interface> interfaces = p.getInterfaces();
 			
 			for (Classe c : classes) {
-				cp.draw(c);				
-			}
-			for (Interface c : interfaces) {
+				if (!c.getInheritence().isEmpty()) System.out.println(c.getInheritence());
 				cp.draw(c);
+				
 			}
+			
+			if (!interfaces.isEmpty()) {				
+				for (Interface c : interfaces) {
+					if (!c.getInheritence().isEmpty()) System.out.println(c.getInheritence());
+					cp.draw(c);
+				}
+			}
+			
 		}
 		cp.show();
 		

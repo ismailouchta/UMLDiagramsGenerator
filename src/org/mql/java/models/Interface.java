@@ -8,8 +8,10 @@ public class Interface {
 	protected String mod, name;
 	protected Vector<String> attributes, methods;
 
-	protected Class<?>[] interfaces;
-	protected Class<?>[] inheritence;
+//	protected Class<?>[] interfaces;
+//	protected Class<?>[] inheritence;
+	protected Vector<String> interfaces;
+	protected Vector<String> inheritence;
 
 	protected Vector<Classe> innerClasses;
 	
@@ -60,19 +62,19 @@ public class Interface {
 		this.innerClasses = innerClasses;
 	}
 	
-	public void setInterfaces(Class<?>[] classes) {
+	public void setInterfaces(Vector<String> classes) {
 		this.interfaces = classes;
 	}
 	
-	public Class<?>[] getInterfaces() {
+	public Vector<String> getInterfaces() {
 		return interfaces;
 	}
 	
-	public Class<?>[] getInheritence() {
+	public Vector<String> getInheritence() {
 		return inheritence;
 	}
 	
-	public void setInheritence(Class<?>[] inheritence) {
+	public void setInheritence(Vector<String> inheritence) {
 		this.inheritence = inheritence;
 	}
 

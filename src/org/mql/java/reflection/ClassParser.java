@@ -121,21 +121,32 @@ public class ClassParser {
 	}
 	
 	void getInheritence(Class<?> cls, Classe temp) {
-		temp.setInheritence(cls.getClasses());
-		
-		if (cls.getSuperclass() != null) {
-			if (!cls.getSuperclass().getSimpleName().contains("Object")) {				
-			System.out.println(
-					cls.getSimpleName() + " inherits from " +
-					cls.getSuperclass().getSimpleName()
-					);
+		if (cls.isInterface()) {
+			Class<?> interfaces[] = cls.getInterfaces();
+			Vector<String> inheritence = new Vector<String>();
+			if (interfaces.length != 0) {
+				for (int i = 0; i < interfaces.length; i++) {
+					inheritence.add(interfaces[i].getSimpleName());
+				}
+			}
+			temp.setInheritence(inheritence);
+		} else {
+			Vector<String> inheritence = new Vector<String>();
+			Class<?> superClass = cls.getSuperclass();
+			if (superClass != null) {
+				String className = superClass.getSimpleName();
+				if (!className.contains("Object")) {
+					inheritence.add(className);
+				}
+				temp.setInheritence(inheritence);
 			}
 		}
-		
 	}
 	
+//				System.out.println(cls.getSimpleName()+" inherits from "+cls.getSuperclass().getSimpleName());
+	
 	void getInterfaces(Class<?> cls, Classe temp) {
-		temp.setInterfaces(cls.getInterfaces());
+//		temp.setInterfaces(cls.getInterfaces());
 	}
 	
 	void getAttributes(Class<?> cls, Classe temp) {
