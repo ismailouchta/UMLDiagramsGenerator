@@ -55,7 +55,16 @@ public class Entity extends JPanel {
 	public void addMethod(String item) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panel.add(new JLabel(item));
+//		panel.add(new JLabel(item));
+//		methods.add(panel);
+		
+		if (item.contains("st4tic")) {
+			item = item.replace("st4tic", "");
+			JLabel jl = new JLabel("<HTML><U>"+item+"</U></HTML>");
+			panel.add(jl);
+		} else {			
+			panel.add(new JLabel(item));
+		}
 		methods.add(panel);
 	}
 	

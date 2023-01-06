@@ -260,6 +260,9 @@ public class ClassParser {
 //    			method += " : " + m[i].getGenericReturnType().getTypeName();
     			method += " : " + m[i].getReturnType().getSimpleName();
     			
+    			if (modif.contains("static"))
+				method += "st4tic";
+    			
     			
     			methodes.add(method);
 //    		}
