@@ -13,7 +13,7 @@ public class Interface {
 	protected Vector<String> interfaces;
 	protected Vector<String> inheritence;
 
-	protected Vector<Classe> innerClasses;
+//	protected Vector<Classe> innerClasses;
 	
 	public Interface() {
 	}
@@ -54,13 +54,13 @@ public class Interface {
 		this.methods = methods;
 	}
 
-	public Vector<Classe> getInnerClasses() {
-		return innerClasses;
-	}
-
-	public void setInnerClasses(Vector<Classe> innerClasses) {
-		this.innerClasses = innerClasses;
-	}
+//	public Vector<Classe> getInnerClasses() {
+//		return innerClasses;
+//	}
+//
+//	public void setInnerClasses(Vector<Classe> innerClasses) {
+//		this.innerClasses = innerClasses;
+//	}
 	
 	public void setInterfaces(Vector<String> classes) {
 		this.interfaces = classes;

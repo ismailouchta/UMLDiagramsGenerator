@@ -31,6 +31,13 @@ public class ProjectParser {
 			Vector<Classe> classes = new Vector<Classe>();
 			Vector<Interface> interfaces = new Vector<Interface>();
 			
+			for ( File fc : contents) {
+		    	  if (fc.isFile()) {
+		    		  String className = fc.getName().replace(".java", "");
+		    		  classesz.add(p + "." + className);
+		    	  }
+			}
+			
 			for ( File f : contents) {
 		    	  if (f.isFile()) {
 		    		  
@@ -40,9 +47,10 @@ public class ProjectParser {
 						Class<?> cls = Class.forName(p + "." + className);
 						ClassParser classparser = new ClassParser(p + "." + className);
 //						System.out.println(p + "." + className);
-						classesz.add(p + "." + className);
 						
-//						System.out.println(":" + p + "." + className);
+//						classesz.add(p + "." + className);
+						
+//						System.out.println(p + "." + className);
 						
 						if (cls.isInterface()) {
 							interfaces.add(classparser.getInterface()); // add classe
@@ -77,14 +85,14 @@ public class ProjectParser {
 				if (!c.getInheritence().isEmpty()) {
 					
 					Vector<String> parents = c.getInheritence();
-//					for (String pr : parents)
-//						System.out.println(c.getName() + " -> " + pr);
+					for (String pr : parents)
+						System.out.println(c.getName() + " -> " + pr);
 				}
 				
 				if (!c.getInterfaces().isEmpty()) {
 					Vector<String> itr = c.getInterfaces();
-//					for (String it : itr)
-//						System.out.println(c.getName() + " --> " + it);
+					for (String it : itr)
+						System.out.println(c.getName() + " --> " + it);
 				}
 				cp.draw(c);
 			}
@@ -94,8 +102,8 @@ public class ProjectParser {
 				for (Interface c : interfaces) {
 					Vector<String> prt = c.getInheritence();
 					if (!c.getInheritence().isEmpty()) {
-//						for (String pr : prt)
-//							System.out.println(c.getName() + " -> " + pr);
+						for (String pr : prt)
+							System.out.println(c.getName() + " -> " + pr);
 					}
 					cp.draw(c);
 				}

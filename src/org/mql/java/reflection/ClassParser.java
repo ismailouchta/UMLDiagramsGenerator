@@ -161,7 +161,24 @@ public class ClassParser {
 				Set<String> classesz = ProjectParser.classesz;
 				if (classesz.contains(f[i].getType().getName())) {
 					System.out.println(cls.getSimpleName() + " - " + f[i].getType().getSimpleName());
+				} 
+				if (f[i].getType().getName().contains("java.util.")) {
+					String s = f[i].getGenericType().getTypeName();
+					
+					s = s.substring(s.indexOf("<") + 1);
+					s = s.substring(0, s.indexOf(">"));
+					
+//					System.out.println(s);
+					
+//					System.out.println(classesz.contains("org.mql.java.models.Classe"));
+					
+					if (classesz.contains(s)) {
+						System.out.println(cls.getSimpleName() + " - " 
+						+ s.substring(s.lastIndexOf('.') + 1));
+					}
 				}
+				
+				
 				//
 				
 				attribute += " " + f[i].getName();
