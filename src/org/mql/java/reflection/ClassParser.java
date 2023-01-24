@@ -4,21 +4,22 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
 import org.mql.java.models.Classe;
 import org.mql.java.models.Interface;
+import org.mql.java.models.Project;
 import org.mql.java.testing.Type;
 import org.mql.java.ui.ClassParserFrame;
 
 public class ClassParser {
+	private Project project;
 	private ClassParserFrame frame = new ClassParserFrame();
 	private Classe temp;
-	
-	public ClassParser() {
-	}
-	
+		
 //	public ClassParser(Class<?> c) {
 //		frame = new ClassParserFrame();
 //		temp = extract(c);
@@ -27,7 +28,8 @@ public class ClassParser {
 //		frame.addStats(nbrAttributes, nbrMethods);
 //	}
 
-	public ClassParser(String className) {
+	public ClassParser(String className, Project project) {
+		this.project = project;
 		try {
 			Class<?> cls = Class.forName(className);
 			draw(cls);
@@ -37,6 +39,10 @@ public class ClassParser {
 		}
 	}
 	
+	public ClassParser() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Classe getClasse() {
 		return temp;
 	}
@@ -113,6 +119,12 @@ public class ClassParser {
 			if (interfaces.length != 0) {
 				for (int i = 0; i < interfaces.length; i++) {
 					inheritence.add(interfaces[i].getSimpleName());
+					
+					project.addAssociation(
+							cls.getSimpleName()
+							+",inheritance,"+
+							interfaces[i].getSimpleName()
+							);
 				}
 			}
 			temp.setInheritence(inheritence);
@@ -123,6 +135,13 @@ public class ClassParser {
 				String className = superClass.getSimpleName();
 				if (!className.contains("Object")) {
 					inheritence.add(className);
+
+					project.addAssociation(
+							cls.getSimpleName()
+							+",inheritance,"+
+							className
+							);
+
 				}
 				temp.setInheritence(inheritence);
 			}
@@ -136,6 +155,13 @@ public class ClassParser {
 		if (extractedInterfaces.length != 0) {
 			for (int i = 0; i < extractedInterfaces.length; i++) {
 				interfaces.add(extractedInterfaces[i].getSimpleName());
+				
+				project.addAssociation(
+						cls.getSimpleName()
+						+",implementation,"
+						+extractedInterfaces[i].getSimpleName()
+						);
+				
 			}
 		}
 		temp.setInterfaces(interfaces);
@@ -158,9 +184,13 @@ public class ClassParser {
 				}
 				
 				// Detect associations
-				Set<String> classesz = ProjectParser.classesz;
+				Set<String> classesz = ProjectParser.classesz;	
 				if (classesz.contains(f[i].getType().getName())) {
-					System.out.println(cls.getSimpleName() + " - " + f[i].getType().getSimpleName());
+					project.addAssociation(
+							cls.getSimpleName()
+							+",association,"
+							+f[i].getType().getSimpleName()
+							);
 				} 
 				if (f[i].getType().getName().contains("java.util.")) {
 					String s = f[i].getGenericType().getTypeName();
@@ -168,17 +198,15 @@ public class ClassParser {
 					s = s.substring(s.indexOf("<") + 1);
 					s = s.substring(0, s.indexOf(">"));
 					
-//					System.out.println(s);
-					
-//					System.out.println(classesz.contains("org.mql.java.models.Classe"));
-					
 					if (classesz.contains(s)) {
-						System.out.println(cls.getSimpleName() + " - " 
-						+ s.substring(s.lastIndexOf('.') + 1));
+
+						project.addAssociation(
+								cls.getSimpleName()
+								+",association,"
+								+s.substring(s.lastIndexOf('.') + 1)
+								);
 					}
 				}
-				
-				
 				//
 				
 				attribute += " " + f[i].getName();
@@ -284,17 +312,17 @@ public class ClassParser {
         temp.setMethods(methodes);
 	}
 		
-	public static void main(String[] args) {
-		if (args.length != 0) {
-			new ClassParser(args[0]);
-		} else {
+//	public static void main(String[] args) {
+//		if (args.length != 0) {
+//			new ClassParser(args[0]);
+//		} else {
 //			new ClassParser(new RandomClass().getClass());
-			new ClassParser("org.mql.java.models.Classe");
+//			new ClassParser("org.mql.java.models.Classe");
 //			new ClassParser("java.util.LinkedHashSet");
 //			new ClassParser("java.util.List");
 //			new ClassParser("java.util.Vector");
 //			new ClassParser("java.lang.String");
 //			new ClassParser(args[0]);
-		}
-	}
+//		}
+//	}
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project>
+	<packages />
+	<associations>
+		<association from="ClassParserFrame" to="JFrame"
+			type="inheritance" />
+		<association from="Entity" to="JPanel" type="inheritance" />
+		<association from="Package" to="Classe" type="association" />
+		<association from="Package" to="Interface"
+			type="association" />
+		<association from="Classe" to="Interface"
+			type="inheritance" />
+		<association from="Project" to="Package"
+			type="association" />
+		<association from="AnotherInterface" to="RandomInterface"
+			type="inheritance" />
+		<association from="AnotherInterface" to="randomClass"
+			type="inheritance" />
+		<association from="Type" to="Enum" type="inheritance" />
+		<association from="Type" to="Type" type="association" />
+		<association from="Type" to="Type" type="association" />
+		<association from="Type" to="Type" type="association" />
+		<association from="Test" to="randomClass"
+			type="implementation" />
+		<association from="ClassParser" to="Project"
+			type="association" />
+		<association from="ClassParser" to="ClassParserFrame"
+			type="association" />
+		<association from="ClassParser" to="Classe"
+			type="association" />
+	</associations>
+</project>

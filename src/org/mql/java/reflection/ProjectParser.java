@@ -9,6 +9,7 @@ import org.mql.java.models.Classe;
 import org.mql.java.models.Interface;
 import org.mql.java.models.Package;
 import org.mql.java.models.Project;
+import org.mql.java.utils.SaveXMLFile;
 
 public class ProjectParser {
 	private Set<String> packs;
@@ -22,7 +23,9 @@ public class ProjectParser {
 		
 		Vector<Package> packages = new Vector<Package>();
 		classesz = new HashSet<>();
-//		classesNames = new HashSet<>();
+		
+		Project project = new Project("Random Project", packages);
+		SaveXMLFile xml = new SaveXMLFile(project);
 		
 		for (String p : packs) {			
 			File directory = new File(src+p.replace(".", "/")+"/");
@@ -45,11 +48,10 @@ public class ProjectParser {
 
 					try {
 						Class<?> cls = Class.forName(p + "." + className);
-						ClassParser classparser = new ClassParser(p + "." + className);
+						ClassParser classparser = new ClassParser(p + "." + className, project);
+						
 //						System.out.println(p + "." + className);
-						
 //						classesz.add(p + "." + className);
-						
 //						System.out.println(p + "." + className);
 						
 						if (cls.isInterface()) {
@@ -68,7 +70,13 @@ public class ProjectParser {
 			
 		}
 		
-		Project project = new Project("Random Project", packages);
+		
+//		Project project = new Project("Random Project", packages);
+		
+		xml.writeAssociations();
+		xml.save();
+//		new SaveXMLFile(project); // // // // // //
+		
 		
 		// Testing
 		Vector<Package> packc = project.getPackages();
@@ -82,18 +90,17 @@ public class ProjectParser {
 			// Inheritence & implements For Classes
 			for (Classe c : classes) {
 			
-				if (!c.getInheritence().isEmpty()) {
-					
-					Vector<String> parents = c.getInheritence();
-					for (String pr : parents)
-						System.out.println(c.getName() + " -> " + pr);
-				}
+//				if (!c.getInheritence().isEmpty()) {
+//					Vector<String> parents = c.getInheritence();
+//					for (String pr : parents)
+//						System.out.println(c.getName() + " -> " + pr);
+//				}
 				
-				if (!c.getInterfaces().isEmpty()) {
-					Vector<String> itr = c.getInterfaces();
-					for (String it : itr)
-						System.out.println(c.getName() + " --> " + it);
-				}
+//				if (!c.getInterfaces().isEmpty()) {
+//					Vector<String> itr = c.getInterfaces();
+//					for (String it : itr)
+//						System.out.println(c.getName() + " --> " + it);
+//				}
 				cp.draw(c);
 			}
 
@@ -101,10 +108,10 @@ public class ProjectParser {
 			if (!interfaces.isEmpty()) {	
 				for (Interface c : interfaces) {
 					Vector<String> prt = c.getInheritence();
-					if (!c.getInheritence().isEmpty()) {
-						for (String pr : prt)
-							System.out.println(c.getName() + " -> " + pr);
-					}
+//					if (!c.getInheritence().isEmpty()) {
+//						for (String pr : prt)
+//							System.out.println(c.getName() + " -> " + pr);
+//					}
 					cp.draw(c);
 				}
 			}
