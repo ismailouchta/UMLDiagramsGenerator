@@ -44,12 +44,12 @@ public class ClassParserFrame extends JFrame {
 			}
 		}
 		
-		List<String> construct = temp.getConstructors();
-		if (construct != null) {
-			for (int i = 0; i < construct.size(); i++) {
-				entity.addMethod(construct.get(i));
-			}
-		}
+//		List<String> construct = temp.getConstructors();
+//		if (construct != null) {
+//			for (int i = 0; i < construct.size(); i++) {
+//				entity.addMethod(construct.get(i));
+//			}
+//		}
 		
 		List<String> methods = temp.getMethods();
 		if (methods != null) {
