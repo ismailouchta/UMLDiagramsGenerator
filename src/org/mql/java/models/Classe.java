@@ -1,8 +1,5 @@
 package org.mql.java.models;
 
-import java.util.List;
-import java.util.Vector;
-
 public class Classe extends Interface {	
 	
 //	private String mod, name;
@@ -13,19 +10,19 @@ public class Classe extends Interface {
 
 //	private Vector<Classe> innerClasses;
 	
-	private Vector<String> constructors;
+//	private Vector<String> constructors;
 	
 	public Classe() {
 	}
 
-	public List<String> getConstructors() {
-		return constructors;
-	}
-
-	public void setConstructors(Vector<String> constructors) {
-		this.constructors = constructors;
-	}
-	
+//	public List<String> getConstructors() {
+//		return constructors;
+//	}
+//
+//	public void setConstructors(Vector<String> constructors) {
+//		this.constructors = constructors;
+//	}
+//	
 //	public void print() {
 //		System.out.print(mod + " class " + name);
 //		

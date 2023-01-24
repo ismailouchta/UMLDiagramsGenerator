@@ -36,12 +36,24 @@ public class SaveXMLFile {
 			Element project = document.createElement("project");
 			document.appendChild(project);
 
-			Element packages = document.createElement("packages");
+			packages = document.createElement("packages");
 			project.appendChild(packages);
 
 			associations = document.createElement("associations");
 			project.appendChild(associations);
+			
+			
+			
+			
+//			for (Package pk : p.getPackages()) {
+//				System.out.println(pk.getName());
+////				Element pack = document.createElement("package");
+////				pack.setAttribute("name", pk.getName());
+////				packages.appendChild(pack);
+//			}
 
+			
+			
 			
 //			List<Object> associations = p.getAssociations();
 //			for (Object as : associations) {
@@ -57,8 +69,50 @@ public class SaveXMLFile {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public void writePackages() {
+		for (Package pk : p.getPackages()) {
+//			System.out.println(pk.getName());
+			Element pack = document.createElement("package");
+			pack.setAttribute("name", pk.getName());
+			packages.appendChild(pack);
+			
+			for (Classe cls : pk.getClasses()) {
+				Element c = document.createElement("class");
+				c.setAttribute("name", cls.getName());
+				c.setAttribute("modifier", cls.getMod());
+				pack.appendChild(c);
+				
+				if (cls.getAttributes() != null) {
+					Element atts = document.createElement("attributes");
+					c.appendChild(atts);
+					for (String att : cls.getAttributes()) {
+						Element at = document.createElement("attribute");
+						at.appendChild(document.createTextNode(att));
+						atts.appendChild(at);
+					}
+				}
+				
+				if (cls.getMethods() != null) {
+					Element meths = document.createElement("methods");
+					c.appendChild(meths);
+					for (String m : cls.getMethods()) {
+						Element met = document.createElement("method");
+						met.appendChild(document.createTextNode(m));
+						meths.appendChild(met);
+					}
+				}
+			}
+		}
+	}
 
 	public void writeAssociations() {
+		
+		for (String as : p.getAssociations()) {
+			String[] separated = as.split(",");
+			addAssociation(separated[0], separated[2], separated[1]);
+		}
+		
 //		Vector<Package> packs = p.getPackages();
 //		for (Package pk : packs) {
 //
@@ -95,11 +149,6 @@ public class SaveXMLFile {
 //				}
 //			}
 //		}
-		
-		for (String as : p.getAssociations()) {
-			String[] separated = as.split(",");
-			addAssociation(separated[0], separated[2], separated[1]);
-		}
 	}
 
 	public void addAssociation(String from, String to, String type) {

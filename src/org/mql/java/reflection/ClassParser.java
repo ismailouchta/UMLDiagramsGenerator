@@ -71,7 +71,7 @@ public class ClassParser {
 		getInheritence(cls, cl);
 		if (!cls.isInterface()) getInterfaces(cls, cl);
 		getAttributes(cls, cl);
-		getConstructors(cls, cl);
+//		getConstructors(cls, cl);
 		getMethods(cls, cl);
 //		getInnerClass(cls, cl);
 		return cl;
@@ -231,10 +231,53 @@ public class ClassParser {
 		}
 	}
 	
-	void getConstructors(Class<?> cls, Classe temp) {
+//	void getConstructors(Class<?> cls, Classe temp) {
+//		Constructor<?> constructors[] = cls.getConstructors();
+//		if (constructors.length != 0) {
+//			Vector<String> constr = new Vector<String>();
+//			for (int i = 0; i < constructors.length; i++) {
+//				String constructor = "";
+//	    			String modif = Modifier.toString(constructors[i].getModifiers());
+//				if (modif.length() != 0) {
+//    				if (modif.contains("private")) {
+//    					constructor += "-";
+//    				} else if (constructor.contains("protected")) {
+//    					constructor += "#";
+//    				} else if (constructor.contains("public")) {
+//    					constructor += "+";
+//    				} else {
+//    					constructor += "+";
+//    				}
+//    			} else {
+//    				constructor += "+";
+//			}
+//			constructor += " "
+//			+ constructors[i].getName().replace(cls.getPackage().getName()+".", "")
+//			+ "(";
+////    			Parameter p[] = m[i].getParameters();
+////    			if (p.length != 0) {
+////        			for (int j = 0; j < p.length; j++) {
+////        				method += p[j].getParameterizedType().getTypeName();        				
+////        				if (j < p.length-1) {
+////        					method += ", ";
+////        				}
+////        			}
+////    			}
+//				constructor += ")";
+//				constr.add(constructor);
+//			}
+//			temp.setConstructors(constr);
+//		}
+//	}
+	
+	void getMethods(Class<?> cls, Classe temp) {
+		
+		Vector<String> methodes = new Vector<String>();
+		
+		// Constructors
 		Constructor<?> constructors[] = cls.getConstructors();
 		if (constructors.length != 0) {
-			Vector<String> constr = new Vector<String>();
+//			Vector<String> constr = new Vector<String>();
 			for (int i = 0; i < constructors.length; i++) {
 				String constructor = "";
 	    			String modif = Modifier.toString(constructors[i].getModifiers());
@@ -264,16 +307,17 @@ public class ClassParser {
 //        			}
 //    			}
 				constructor += ")";
-				constr.add(constructor);
+				methodes.add(constructor);
 			}
-			temp.setConstructors(constr);
+//			temp.setConstructors(constr);
 		}
-	}
-	
-	void getMethods(Class<?> cls, Classe temp) {
+		
+		
+		
+		
+		// Methods
 		Method m[] = cls.getDeclaredMethods();
 		
-		Vector<String> methodes = new Vector<String>();
 		
         for (int i = 0; i < m.length; i++) {
     		

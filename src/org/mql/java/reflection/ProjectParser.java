@@ -20,9 +20,9 @@ public class ProjectParser {
 		
 		packs = new HashSet<>();
 		listOfPackage(src,packs);
+		classesz = new HashSet<>();
 		
 		Vector<Package> packages = new Vector<Package>();
-		classesz = new HashSet<>();
 		
 		Project project = new Project("Random Project", packages);
 		SaveXMLFile xml = new SaveXMLFile(project);
@@ -67,12 +67,15 @@ public class ProjectParser {
 			}
 			Package pack = new Package(p, classes, interfaces);
 			packages.add(pack);
-			
 		}
+		project.setPackages(packages);
 		
+
+
 		
 //		Project project = new Project("Random Project", packages);
 		
+		xml.writePackages();
 		xml.writeAssociations();
 		xml.save();
 //		new SaveXMLFile(project); // // // // // //

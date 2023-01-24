@@ -7,7 +7,7 @@ import java.util.Vector;
 public class Project {
 	private String name;
 	private Vector<Package> packages;
-	private List<String> associations; //
+	private List<String> associations;
 
 	public Project(String name, Vector<Package> packages) {
 		this.name = name;
@@ -19,6 +19,10 @@ public class Project {
 		return name;
 	}
 
+	public void setPackages(Vector<Package> packages) {
+		this.packages = packages;
+	}
+	
 	public Vector<Package> getPackages() {
 		return packages;
 	}
