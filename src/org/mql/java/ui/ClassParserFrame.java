@@ -1,6 +1,7 @@
 package org.mql.java.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.util.List;
@@ -19,10 +20,16 @@ public class ClassParserFrame extends JFrame {
 	private JScrollPane scrollpane;
 	
 	public ClassParserFrame() {
-		screen = new JPanel();		
+		screen = new JPanel();
 		content = new JPanel();
 		stats = new JPanel();
 		draw = new JPanel();
+		
+//		screen.setBackground(Color.WHITE);
+//		content.setBackground(Color.WHITE);
+//		stats.setBackground(Color.WHITE);
+		draw.setBackground(Color.WHITE);
+		
 		init();
 	}
 	
@@ -55,6 +62,7 @@ public class ClassParserFrame extends JFrame {
 	}
 	
 	private void config() {
+		getContentPane().setBackground(Color.white);
 		setTitle("UML Diagrams Generator - Java Project");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -70,7 +78,7 @@ public class ClassParserFrame extends JFrame {
 		content.setLayout(new BorderLayout());
 	}
 
-	public void addStats(int nbrAttributes, int nbrMethods) {
+	public void showF() {
 		scrollpane = new JScrollPane(draw);
 //		scrollpane.setPreferredSize(new Dimension(550, 700));
 		scrollpane.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize()); // full screen

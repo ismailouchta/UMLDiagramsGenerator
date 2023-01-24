@@ -17,7 +17,6 @@ public class Entity extends JPanel {
 	private JPanel title, content, attributes, methods;
 
 	public Entity(String name, Type type) {
-		
 		title = new JPanel();
 		attributes = new JPanel();
 		methods = new JPanel();
@@ -29,6 +28,7 @@ public class Entity extends JPanel {
 			JPanel tp = new JPanel();
 			tp.setLayout(new FlowLayout(FlowLayout.CENTER));
 			tp.add(new JLabel("<< interface >>"));
+			tp.setBackground(Color.WHITE); //
 			title.add(tp);
 			
 			JPanel p = new JPanel();
@@ -37,6 +37,7 @@ public class Entity extends JPanel {
 			Font f = label.getFont();
 			label.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
 			p.add(label);
+			p.setBackground(Color.WHITE); //
 			title.add(p);
 			
 		} else {
@@ -46,6 +47,7 @@ public class Entity extends JPanel {
 			Font f = label.getFont();
 			label.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
 			p.add(label);
+			p.setBackground(Color.WHITE); //
 			title.add(p);
 		}
 		content.add(title); content.add(attributes); content.add(methods);
@@ -65,6 +67,7 @@ public class Entity extends JPanel {
 		} else {			
 			panel.add(new JLabel(item));
 		}
+		panel.setBackground(Color.WHITE); //
 		methods.add(panel);
 	}
 	
@@ -79,7 +82,7 @@ public class Entity extends JPanel {
 		} else {			
 			panel.add(new JLabel(item));
 		}
-		
+		panel.setBackground(Color.WHITE); //
 		attributes.add(panel);
 	}
 	

@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Set;
 import java.util.Vector;
 
 import org.mql.java.models.Classe;
@@ -14,8 +15,6 @@ import org.mql.java.ui.ClassParserFrame;
 public class ClassParser {
 	private ClassParserFrame frame = new ClassParserFrame();
 	private Classe temp;
-	private int nbrAttributes = 0;
-	private int nbrMethods = 0;
 	
 	public ClassParser() {
 	}
@@ -33,11 +32,6 @@ public class ClassParser {
 			Class<?> cls = Class.forName(className);
 			draw(cls);
 			temp = extract(cls);
-//			temp.print();
-			
-//			frame = new ClassParserFrame();
-//			frame.addEntity(temp);
-//			frame.addStats(nbrAttributes, nbrMethods);
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -51,28 +45,25 @@ public class ClassParser {
 		return (Interface) temp;
 	}
 	
-	void draw(Classe cc) {
-//		frame = new ClassParserFrame();
-		temp = cc;
-		frame.addEntity(temp, Type.CLASS);
+	void draw(Classe cl) {
+//		temp = cc;
+		frame.addEntity(cl, Type.CLASS);
 	}
 	
-	void draw(Interface cc) {
-		temp = (Classe) cc;
-		frame.addEntity(temp, Type.INTERFACE);
+	void draw(Interface it) {
+//		temp = (Classe) it;
+		frame.addEntity((Classe) it, Type.INTERFACE);
 	}
 	
 	void show() {
-		frame.addStats(nbrAttributes, nbrMethods);	
+		frame.showF();
 	}
 	
 	Classe extract(Class<?> cls) {
 		Classe cl = new Classe();
 		getFirst(cls, cl);
 		getInheritence(cls, cl);
-		
 		if (!cls.isInterface()) getInterfaces(cls, cl);
-		
 		getAttributes(cls, cl);
 		getConstructors(cls, cl);
 		getMethods(cls, cl);
@@ -80,12 +71,9 @@ public class ClassParser {
 		return cl;
 	}
 	
-	
 	void draw(Class<?> cls) {
-		
 //		Class<?> herite[] = cls.getInterfaces();
 //		Class<?> herite = cls.getSuperclass();
-
 //		if (herite != null) {	
 //			System.out.println(herite);
 //			Classe s = extract(herite);
@@ -94,7 +82,6 @@ public class ClassParser {
 //				frame.addEntity(s, Type.CLASS);
 //			}
 //		}
-		
 //		if (herite.length != 0) {
 //				draw(herite[0]);
 //				Classe s = extract(herite[0]);
@@ -105,22 +92,19 @@ public class ClassParser {
 	void getFirst(Class<?> cls, Classe temp) {
 		int mods = cls.getModifiers();
 		temp.setName(cls.getSimpleName());
-//		System.out.println(cls.getSimpleName());
 		temp.setMod(Modifier.toString(mods));
 	}
 	
-	void getInnerClass(Class<?> cls, Classe temp) {
-		Class<?> innerClasses[] = cls.getDeclaredClasses();
-		
-		Vector<Classe> innerCl = new Vector<Classe>();
-				
-		if (innerClasses.length != 0) {
-	        for (int i = 0; i < innerClasses.length; i++) {       	
-				innerCl.add(extract(innerClasses[i]));
-	        }
-		}
-		temp.setInnerClasses(innerCl);
-	}
+//	void getInnerClass(Class<?> cls, Classe temp) {
+//		Class<?> innerClasses[] = cls.getDeclaredClasses();
+//		Vector<Classe> innerCl = new Vector<Classe>();
+//		if (innerClasses.length != 0) {
+//	        for (int i = 0; i < innerClasses.length; i++) {       	
+//				innerCl.add(extract(innerClasses[i]));
+//	        }
+//		}
+//		temp.setInnerClasses(innerCl);
+//	}
 	
 	void getInheritence(Class<?> cls, Classe temp) {
 		if (cls.isInterface()) {
@@ -162,11 +146,8 @@ public class ClassParser {
 		if (f.length != 0) {			
 			Vector<String> attributes = new Vector<String>();
 			
-			for (int i = 0; i < f.length; i++) {	
-				nbrAttributes++;
+			for (int i = 0; i < f.length; i++) {
 				String attribute = "";
-//				attribute += Modifier.toString(f[i].getModifiers());
-//				attribute += " " + f[i].getType() + " " + f[i].getName();
 				String modifier = Modifier.toString(f[i].getModifiers());
 				if (modifier.contains("private")) {
 					attribute += "-";
@@ -176,16 +157,20 @@ public class ClassParser {
 					attribute += "+";
 				}
 				
-//				System.out.println();
+				// Detect associations
+				Set<String> classesz = ProjectParser.classesz;
+				if (classesz.contains(f[i].getType().getName())) {
+					System.out.println(cls.getSimpleName() + " - " + f[i].getType().getSimpleName());
+				}
+				//
 				
 				attribute += " " + f[i].getName();
 				attribute += " : " + f[i].getType().getSimpleName();
 				
 				if (modifier.contains("final")) {
-					attribute += " = "; // finish this one
+					attribute += " = ";
 					f[i].setAccessible(true);
 			        try {
-//						int privateHidenInt = (Integer)f[i].get(null);
 						attribute += f[i].get(null);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -194,13 +179,8 @@ public class ClassParser {
 				
 				if (modifier.contains("static")) {
 					attribute += "st4tic";
-					
-				}
-				
-//				if (!Modifier.toString(f[i].getModifiers()).contains("private")) {
-					attributes.add(attribute);
-//					System.out.println(attribute);
-//				}
+				}				
+				attributes.add(attribute);
 				temp.setAttributes(attributes);
 			}
 		}
@@ -210,14 +190,9 @@ public class ClassParser {
 		Constructor<?> constructors[] = cls.getConstructors();
 		if (constructors.length != 0) {
 			Vector<String> constr = new Vector<String>();
-			nbrMethods++;
 			for (int i = 0; i < constructors.length; i++) {
-				
-//				constr.add(constructors[i].toString());
-				
 				String constructor = "";
-	    		String modif = Modifier.toString(constructors[i].getModifiers());
-//				System.out.println(Modifier.toString(constructors[i].getModifiers()));
+	    			String modif = Modifier.toString(constructors[i].getModifiers());
 				if (modif.length() != 0) {
     				if (modif.contains("private")) {
     					constructor += "-";
@@ -230,15 +205,10 @@ public class ClassParser {
     				}
     			} else {
     				constructor += "+";
-				}
-				
-//				System.out.println(cls.getPackage().getName());
-				
-				
-				constructor += " "
-				+ constructors[i].getName().replace(cls.getPackage().getName()+".", "")
-				+ "(";
-    			
+			}
+			constructor += " "
+			+ constructors[i].getName().replace(cls.getPackage().getName()+".", "")
+			+ "(";
 //    			Parameter p[] = m[i].getParameters();
 //    			if (p.length != 0) {
 //        			for (int j = 0; j < p.length; j++) {
@@ -261,13 +231,10 @@ public class ClassParser {
 		Vector<String> methodes = new Vector<String>();
 		
         for (int i = 0; i < m.length; i++) {
-    		nbrMethods++;
     		
     		String method = "";
     		String modif = Modifier.toString(m[i].getModifiers());
-    		
-//    		if(!modif.contains("private")) {
-    			
+
     			if (modif.length() != 0) {
     				if (modif.contains("private")) {
     					method += "-";
@@ -281,10 +248,7 @@ public class ClassParser {
     			} else {
 					method += "+";
 				}
-    			
-//    			method += " " + m[i].getGenericReturnType().getTypeName();
     			method += " " + m[i].getName() + "(";
-    			
 //    			Parameter p[] = m[i].getParameters();
 //    			if (p.length != 0) {
 //        			for (int j = 0; j < p.length; j++) {
@@ -295,16 +259,10 @@ public class ClassParser {
 //        			}
 //    			}
     			method += ")";
-    			
-//    			method += " : " + m[i].getGenericReturnType().getTypeName();
     			method += " : " + m[i].getReturnType().getSimpleName();
     			
-    			if (modif.contains("static"))
-				method += "st4tic";
-    			
-    			
+    			if (modif.contains("static")) method += "st4tic";
     			methodes.add(method);
-//    		}
         }
         temp.setMethods(methodes);
 	}
