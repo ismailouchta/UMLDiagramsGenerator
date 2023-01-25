@@ -112,5 +112,4 @@ public class ProjectParser {
     public static void main(String[] args) {
     		new ProjectParser("/Users/ismailouchta/eclipse-workspace/UMLDiagramsGenerator/src/");
     }
-
 }

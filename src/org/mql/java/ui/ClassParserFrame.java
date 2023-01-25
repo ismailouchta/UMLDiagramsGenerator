@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 
 import org.mql.java.models.Attribute;
 import org.mql.java.models.Classe;
+import org.mql.java.models.Method;
 
 public class ClassParserFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -34,12 +35,6 @@ public class ClassParserFrame extends JFrame {
 	public void addEntity(Classe temp, org.mql.java.testing.Type type) {
 		
 		Entity entity = new Entity(temp.getName(), type);
-
-//		List<String> attributes = temp.getAttributes();
-//		if (attributes != null) {
-//			for (int i = 0; i < attributes.size(); i++)
-//				entity.addAttribute(attributes.get(i));
-//		}
 		
 		List<Attribute> attributes = temp.getAttributes();
 		if (attributes != null) {
@@ -70,10 +65,37 @@ public class ClassParserFrame extends JFrame {
 			}
 		}
 		
-		List<String> methods = temp.getMethods();
+		List<Method> methods = temp.getMethods();
 		if (methods != null) {
-			for (int i = 0; i < methods.size(); i++)
-				entity.addMethod(methods.get(i));
+			for (int i = 0; i < methods.size(); i++) {
+
+				String method = "";
+				boolean isStatic = false;
+				
+				String modifier = methods.get(i).getModifier();
+				if (modifier.length() != 0) {
+					if (modifier.contains("private")) {
+						method += "-";
+					} else if (method.contains("protected")) {
+						method += "#";
+					} else if (method.contains("public")) {
+						method += "+";
+					} else {
+						method += "+";
+					}
+				} else {
+					method += "+";
+				}
+				method += " " + methods.get(i).getName() + "()";
+				
+				method += " : " + methods.get(i).getReturnType();
+				
+				if (modifier.contains("static")) {
+					isStatic = true;
+				}
+				
+				entity.addMethod(method, isStatic);
+			}
 		}
 
 		draw.add(entity);

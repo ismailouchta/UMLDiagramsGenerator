@@ -54,12 +54,11 @@ public class Entity extends JPanel {
 		add(content);
 	}
 	
-	public void addMethod(String item) {
+	public void addMethod(String item, boolean isStatic) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
-		if (item.contains("st4tic")) {
-			item = item.replace("st4tic", "");
+		if (isStatic) {
 			JLabel jl = new JLabel("<HTML><U>"+item+"</U></HTML>");
 			panel.add(jl);
 		} else {			
@@ -75,7 +74,6 @@ public class Entity extends JPanel {
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
 		if (isStatic) {
-//			item = item.replace("st4tic", "");
 			JLabel jl = new JLabel("<HTML><U>"+item+"</U></HTML>");
 			panel.add(jl);
 		} else {			

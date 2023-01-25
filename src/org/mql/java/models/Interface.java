@@ -1,16 +1,12 @@
 package org.mql.java.models;
 
-import java.util.List;
 import java.util.Vector;
 
 public class Interface {	
 	
 	protected String mod, name;
-//	protected Vector<String> attributes;
-	
 	protected Vector<Attribute> attributes;
-	
-	protected Vector<String> methods;
+	protected Vector<Method> methods;
 	protected Vector<String> interfaces;
 	protected Vector<String> inheritence;
 	
@@ -46,11 +42,11 @@ public class Interface {
 		this.attributes = attributes;
 	}
 
-	public List<String> getMethods() {
+	public Vector<Method> getMethods() {
 		return methods;
 	}
 
-	public void setMethods(Vector<String> methods) {
+	public void setMethods(Vector<Method> methods) {
 		this.methods = methods;
 	}
 	

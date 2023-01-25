@@ -101,7 +101,6 @@ public class ClassParser {
 		Field f[] = cls.getDeclaredFields();
 		if (f.length != 0) {
 			
-//			Vector<String> attributes = new Vector<String>();
 			Vector<Attribute> attributes = new Vector<Attribute>(); //
 			
 			for (int i = 0; i < f.length; i++) {
@@ -124,7 +123,6 @@ public class ClassParser {
 					}
 				} // End
 				
-//				String attribute = "";
 				
 				Attribute attribute = new Attribute(); //
 				
@@ -143,35 +141,6 @@ public class ClassParser {
 					}
 				}
 				
-				
-//				System.out.println(modifier);
-				
-//				if (modifier.contains("private")) {
-//					attribute += "-";
-//				} else if (modifier.contains("protected")) {
-//					attribute += "#";
-//				} else if (modifier.contains("public")) {
-//					attribute += "+";
-//				}
-				
-
-//				attribute += " " + f[i].getName();
-//				attribute += " : " + f[i].getType().getSimpleName();
-
-//				if (modifier.contains("final")) {
-//					attribute += " = ";
-//					f[i].setAccessible(true);
-//					try {
-//						attribute += f[i].get(null);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-
-//				if (modifier.contains("static")) {
-//					attribute += "st4tic";
-//				}
-				
 				attributes.add(attribute);
 				temp.setAttributes(attributes);
 			}
@@ -179,82 +148,33 @@ public class ClassParser {
 	}
 
 	void getMethods(Class<?> cls, Classe temp) {
-		Vector<String> methodes = new Vector<String>();
+		Vector<org.mql.java.models.Method> methodes = new Vector<org.mql.java.models.Method>();
 
 		// Constructors
 		Constructor<?> constructors[] = cls.getConstructors();
 		if (constructors.length != 0) {
-//			Vector<String> constr = new Vector<String>();
 			for (int i = 0; i < constructors.length; i++) {
-				String constructor = "";
+				org.mql.java.models.Method method = new org.mql.java.models.Method();
+				
 				String modif = Modifier.toString(constructors[i].getModifiers());
-				if (modif.length() != 0) {
-					if (modif.contains("private")) {
-						constructor += "-";
-					} else if (constructor.contains("protected")) {
-						constructor += "#";
-					} else if (constructor.contains("public")) {
-						constructor += "+";
-					} else {
-						constructor += "+";
-					}
-				} else {
-					constructor += "+";
-				}
-				constructor += " " + constructors[i].getName()
-						.replace(cls.getPackage()
-						.getName() + ".", "") + "(";
-				
-//    			Parameter p[] = m[i].getParameters();
-//    			if (p.length != 0) {
-//        			for (int j = 0; j < p.length; j++) {
-//        				method += p[j].getParameterizedType().getTypeName();        				
-//        				if (j < p.length-1) {
-//        					method += ", ";
-//        				}
-//        			}
-//    			}
-				
-				constructor += ")";
-				methodes.add(constructor);
+
+				method.setModifier(modif);
+				method.setName(constructors[i].getName().replace(cls.getPackage().getName() + ".", ""));
+				methodes.add(method);
 			}
-			// temp.setConstructors(constr);
 		}
 
 		// Methods
 		Method m[] = cls.getDeclaredMethods();
 		for (int i = 0; i < m.length; i++) {
-			String method = "";
+			org.mql.java.models.Method method = new org.mql.java.models.Method(); //
+			
 			String modif = Modifier.toString(m[i].getModifiers());
 
-			if (modif.length() != 0) {
-				if (modif.contains("private")) {
-					method += "-";
-				} else if (method.contains("protected")) {
-					method += "#";
-				} else if (method.contains("public")) {
-					method += "+";
-				} else {
-					method += "+";
-				}
-			} else {
-				method += "+";
-			}
-			method += " " + m[i].getName() + "(";
-//    			Parameter p[] = m[i].getParameters();
-//    			if (p.length != 0) {
-//        			for (int j = 0; j < p.length; j++) {
-//        				method += p[j].getParameterizedType().getTypeName();        				
-//        				if (j < p.length-1) {
-//        					method += ", ";
-//        				}
-//        			}
-//    			}
-			method += ")";
-			method += " : " + m[i].getReturnType().getSimpleName();
-
-			if (modif.contains("static"))
-				method += "st4tic";
+			method.setModifier(modif);
+			method.setName(m[i].getName());
+			method.setReturnType(m[i].getReturnType().getSimpleName());
+			
 			methodes.add(method);
 		}
 		temp.setMethods(methodes);
