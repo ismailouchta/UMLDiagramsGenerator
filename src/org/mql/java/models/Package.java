@@ -3,6 +3,7 @@ package org.mql.java.models;
 import java.util.Vector;
 
 public class Package {
+	
 	private String name;
 	private Vector<Classe> classes;
 	private Vector<Interface> interfaces;
@@ -17,10 +18,6 @@ public class Package {
 		return classes;
 	}
 
-//	public void setClasses(Vector<Classe> classes) {
-//		this.classes = classes;
-//	}
-
 	public String getName() {
 		return name;
 	}
@@ -28,9 +25,5 @@ public class Package {
 	public Vector<Interface> getInterfaces() {
 		return interfaces;
 	}
-
-//	public void setInterfaces(Vector<Interface> interfaces) {
-//		this.interfaces = interfaces;
-//	}
 	
 }

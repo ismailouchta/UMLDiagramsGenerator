@@ -2,30 +2,12 @@ package org.mql.java.models;
 
 public class Classe extends Interface {	
 	
-//	private String mod, name;
-//	private Vector<String> constructors, attributes, methods;
-//
-//	private Class<?>[] interfaces;
-//	private Class<?>[] inheritence;
-
-//	private Vector<Classe> innerClasses;
-	
-//	private Vector<String> constructors;
-	
 	public Classe() {
+		
 	}
-
-//	public List<String> getConstructors() {
-//		return constructors;
-//	}
-//
-//	public void setConstructors(Vector<String> constructors) {
-//		this.constructors = constructors;
-//	}
-//	
+	
 //	public void print() {
 //		System.out.print(mod + " class " + name);
-//		
 //		if (inheritence.length != 0) {
 //		System.out.print(" extends ");
 //			for (int i = 0; i < inheritence.length; i++) {
@@ -63,14 +45,6 @@ public class Classe extends Interface {
 //				System.out.println(methods.get(i) + ";");
 //			}
 //		}
-//		
-////		if ((innerClasses.size() != 0) && innerClasses != null) {
-////	        for (int i = 0; i < innerClasses.size(); i++) {
-////	        	innerClasses.get(i).print();
-////	        }
-////		}
-//		
-//		System.out.println("}");
 //	}
 
 }

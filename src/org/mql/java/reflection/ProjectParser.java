@@ -9,12 +9,17 @@ import org.mql.java.models.Classe;
 import org.mql.java.models.Interface;
 import org.mql.java.models.Package;
 import org.mql.java.models.Project;
+import org.mql.java.testing.Type;
+import org.mql.java.ui.ClassParserFrame;
 import org.mql.java.utils.SaveXMLFile;
 
 public class ProjectParser {
+	
+	private Project project;
 	private Set<String> packs;
+	private ClassParserFrame frame = new ClassParserFrame();
+
 	static Set<String> classesz;
-//	private Set<String> classesNames;
 
 	public ProjectParser(String src) {
 		
@@ -24,7 +29,8 @@ public class ProjectParser {
 		
 		Vector<Package> packages = new Vector<Package>();
 		
-		Project project = new Project("Random Project", packages);
+		project = new Project("Random Project", packages);
+		
 		SaveXMLFile xml = new SaveXMLFile(project);
 		
 		for (String p : packs) {			
@@ -44,15 +50,11 @@ public class ProjectParser {
 			for ( File f : contents) {
 		    	  if (f.isFile()) {
 		    		  
-		    		  String className = f.getName().replace(".java", "");
+		    		String className = f.getName().replace(".java", "");
 
 					try {
 						Class<?> cls = Class.forName(p + "." + className);
 						ClassParser classparser = new ClassParser(p + "." + className, project);
-						
-//						System.out.println(p + "." + className);
-//						classesz.add(p + "." + className);
-//						System.out.println(p + "." + className);
 						
 						if (cls.isInterface()) {
 							interfaces.add(classparser.getInterface()); // add classe
@@ -65,6 +67,7 @@ public class ProjectParser {
 					}
 		    	  }
 			}
+			
 			Package pack = new Package(p, classes, interfaces);
 			packages.add(pack);
 		}
@@ -73,54 +76,31 @@ public class ProjectParser {
 
 
 		
-//		Project project = new Project("Random Project", packages);
+
 		
 		xml.writePackages();
 		xml.writeAssociations();
 		xml.save();
-//		new SaveXMLFile(project); // // // // // //
+		
+		draw();
 		
 		
-		// Testing
+		
+	}
+	
+	void draw() {
 		Vector<Package> packc = project.getPackages();
-		ClassParser cp = new ClassParser();
-		
 		for (Package p : packc) {
-			
 			Vector<Classe> classes = p.getClasses();
 			Vector<Interface> interfaces = p.getInterfaces();
-			
-			// Inheritence & implements For Classes
-			for (Classe c : classes) {
-			
-//				if (!c.getInheritence().isEmpty()) {
-//					Vector<String> parents = c.getInheritence();
-//					for (String pr : parents)
-//						System.out.println(c.getName() + " -> " + pr);
-//				}
-				
-//				if (!c.getInterfaces().isEmpty()) {
-//					Vector<String> itr = c.getInterfaces();
-//					for (String it : itr)
-//						System.out.println(c.getName() + " --> " + it);
-//				}
-				cp.draw(c);
-			}
 
-			// Inheritence For Interfaces
-			if (!interfaces.isEmpty()) {	
-				for (Interface c : interfaces) {
-					Vector<String> prt = c.getInheritence();
-//					if (!c.getInheritence().isEmpty()) {
-//						for (String pr : prt)
-//							System.out.println(c.getName() + " -> " + pr);
-//					}
-					cp.draw(c);
-				}
-			}
+			if (!classes.isEmpty())
+				for (Classe c : classes) frame.addEntity(c, Type.CLASS);
+
+			if (!interfaces.isEmpty())
+				for (Interface i : interfaces) frame.addEntity((Classe) i, Type.INTERFACE);
 		}
-		cp.show();
-		
+		frame.showF();
 	}
 	
     public static void listOfPackage(String directoryName, Set<String> pack) {

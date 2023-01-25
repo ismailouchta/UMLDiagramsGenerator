@@ -25,9 +25,6 @@ public class ClassParserFrame extends JFrame {
 		stats = new JPanel();
 		draw = new JPanel();
 		
-//		screen.setBackground(Color.WHITE);
-//		content.setBackground(Color.WHITE);
-//		stats.setBackground(Color.WHITE);
 		draw.setBackground(Color.WHITE);
 		
 		init();
@@ -39,23 +36,14 @@ public class ClassParserFrame extends JFrame {
 
 		List<String> attributes = temp.getAttributes();
 		if (attributes != null) {
-			for (int i = 0; i < attributes.size(); i++) {
+			for (int i = 0; i < attributes.size(); i++)
 				entity.addAttribute(attributes.get(i));
-			}
 		}
-		
-//		List<String> construct = temp.getConstructors();
-//		if (construct != null) {
-//			for (int i = 0; i < construct.size(); i++) {
-//				entity.addMethod(construct.get(i));
-//			}
-//		}
 		
 		List<String> methods = temp.getMethods();
 		if (methods != null) {
-			for (int i = 0; i < methods.size(); i++) {
+			for (int i = 0; i < methods.size(); i++)
 				entity.addMethod(methods.get(i));
-			}
 		}
 
 		draw.add(entity);
@@ -66,7 +54,6 @@ public class ClassParserFrame extends JFrame {
 		setTitle("UML Diagrams Generator - Java Project");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-//		setSize(800, 800);
 		pack();
 		setVisible(true);
 	}
@@ -74,17 +61,14 @@ public class ClassParserFrame extends JFrame {
 	void init() { 
 		screen.setLayout(new FlowLayout(FlowLayout.CENTER));
 		stats.setLayout(new BoxLayout(stats, BoxLayout.Y_AXIS));
-//		draw.setLayout(new BoxLayout(draw, BoxLayout.Y_AXIS)); // here to make it | again
 		content.setLayout(new BorderLayout());
 	}
 
 	public void showF() {
 		scrollpane = new JScrollPane(draw);
-//		scrollpane.setPreferredSize(new Dimension(550, 700));
-		scrollpane.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize()); // full screen
+		scrollpane.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize()); // Full Screen
 		scrollpane.getVerticalScrollBar().setUnitIncrement(16);
 		scrollpane.getHorizontalScrollBar().setUnitIncrement(16);
-		
 		content.add(scrollpane, BorderLayout.CENTER);
 				
 		screen.add(content);

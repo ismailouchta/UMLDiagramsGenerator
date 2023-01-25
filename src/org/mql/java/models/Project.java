@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class Project {
+	
 	private String name;
 	private Vector<Package> packages;
 	private List<String> associations;
@@ -26,10 +27,6 @@ public class Project {
 	public Vector<Package> getPackages() {
 		return packages;
 	}
-	
-//	public void setPackages(Vector<Package> packages) {
-//	this.packages = packages;
-//}
 
 	public List<String> getAssociations() {
 		return associations;
