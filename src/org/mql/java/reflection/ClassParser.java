@@ -7,6 +7,7 @@ import java.lang.reflect.Modifier;
 import java.util.Set;
 import java.util.Vector;
 
+import org.mql.java.models.Attribute;
 import org.mql.java.models.Classe;
 import org.mql.java.models.Interface;
 import org.mql.java.models.Project;
@@ -99,7 +100,10 @@ public class ClassParser {
 		
 		Field f[] = cls.getDeclaredFields();
 		if (f.length != 0) {
-			Vector<String> attributes = new Vector<String>();
+			
+//			Vector<String> attributes = new Vector<String>();
+			Vector<Attribute> attributes = new Vector<Attribute>(); //
+			
 			for (int i = 0; i < f.length; i++) {
 				
 				// Detect associations
@@ -120,32 +124,54 @@ public class ClassParser {
 					}
 				} // End
 				
-				String attribute = "";
+//				String attribute = "";
+				
+				Attribute attribute = new Attribute(); //
+				
 				String modifier = Modifier.toString(f[i].getModifiers());
-				if (modifier.contains("private")) {
-					attribute += "-";
-				} else if (modifier.contains("protected")) {
-					attribute += "#";
-				} else if (modifier.contains("public")) {
-					attribute += "+";
-				}
-
-				attribute += " " + f[i].getName();
-				attribute += " : " + f[i].getType().getSimpleName();
-
+				
+				attribute.setModifier(modifier);
+				attribute.setName(f[i].getName());
+				attribute.setType(f[i].getType().getSimpleName());
+				
 				if (modifier.contains("final")) {
-					attribute += " = ";
 					f[i].setAccessible(true);
 					try {
-						attribute += f[i].get(null);
+						attribute.setValue(f[i].get(null));
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
+				
+				
+//				System.out.println(modifier);
+				
+//				if (modifier.contains("private")) {
+//					attribute += "-";
+//				} else if (modifier.contains("protected")) {
+//					attribute += "#";
+//				} else if (modifier.contains("public")) {
+//					attribute += "+";
+//				}
+				
 
-				if (modifier.contains("static")) {
-					attribute += "st4tic";
-				}
+//				attribute += " " + f[i].getName();
+//				attribute += " : " + f[i].getType().getSimpleName();
+
+//				if (modifier.contains("final")) {
+//					attribute += " = ";
+//					f[i].setAccessible(true);
+//					try {
+//						attribute += f[i].get(null);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+
+//				if (modifier.contains("static")) {
+//					attribute += "st4tic";
+//				}
+				
 				attributes.add(attribute);
 				temp.setAttributes(attributes);
 			}

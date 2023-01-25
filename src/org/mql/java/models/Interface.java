@@ -6,11 +6,16 @@ import java.util.Vector;
 public class Interface {	
 	
 	protected String mod, name;
-	protected Vector<String> attributes, methods;
+//	protected Vector<String> attributes;
+	
+	protected Vector<Attribute> attributes;
+	
+	protected Vector<String> methods;
 	protected Vector<String> interfaces;
 	protected Vector<String> inheritence;
 	
 	public Interface() {
+		
 	}
 	
 	public Interface(String name) {
@@ -33,11 +38,11 @@ public class Interface {
 		this.name = name;
 	}
 
-	public Vector<String> getAttributes() {
+	public Vector<Attribute> getAttributes() {
 		return attributes;
 	}
 
-	public void setAttributes(Vector<String> attributes) {
+	public void setAttributes(Vector<Attribute> attributes) {
 		this.attributes = attributes;
 	}
 
@@ -64,5 +69,4 @@ public class Interface {
 	public void setInheritence(Vector<String> inheritence) {
 		this.inheritence = inheritence;
 	}
-
 }

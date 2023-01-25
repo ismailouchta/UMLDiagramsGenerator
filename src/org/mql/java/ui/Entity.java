@@ -28,7 +28,7 @@ public class Entity extends JPanel {
 			JPanel tp = new JPanel();
 			tp.setLayout(new FlowLayout(FlowLayout.CENTER));
 			tp.add(new JLabel("<< interface >>"));
-			tp.setBackground(Color.WHITE); //
+			tp.setBackground(Color.WHITE);
 			title.add(tp);
 			
 			JPanel p = new JPanel();
@@ -37,7 +37,7 @@ public class Entity extends JPanel {
 			Font f = label.getFont();
 			label.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
 			p.add(label);
-			p.setBackground(Color.WHITE); //
+			p.setBackground(Color.WHITE);
 			title.add(p);
 			
 		} else {
@@ -47,7 +47,7 @@ public class Entity extends JPanel {
 			Font f = label.getFont();
 			label.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
 			p.add(label);
-			p.setBackground(Color.WHITE); //
+			p.setBackground(Color.WHITE);
 			title.add(p);
 		}
 		content.add(title); content.add(attributes); content.add(methods);
@@ -57,8 +57,6 @@ public class Entity extends JPanel {
 	public void addMethod(String item) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-//		panel.add(new JLabel(item));
-//		methods.add(panel);
 		
 		if (item.contains("st4tic")) {
 			item = item.replace("st4tic", "");
@@ -67,22 +65,23 @@ public class Entity extends JPanel {
 		} else {			
 			panel.add(new JLabel(item));
 		}
-		panel.setBackground(Color.WHITE); //
+		
+		panel.setBackground(Color.WHITE);
 		methods.add(panel);
 	}
 	
-	public void addAttribute(String item) {
+	public void addAttribute(String item, boolean isStatic) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
-		if (item.contains("st4tic")) {
-			item = item.replace("st4tic", "");
+		if (isStatic) {
+//			item = item.replace("st4tic", "");
 			JLabel jl = new JLabel("<HTML><U>"+item+"</U></HTML>");
 			panel.add(jl);
 		} else {			
 			panel.add(new JLabel(item));
 		}
-		panel.setBackground(Color.WHITE); //
+		panel.setBackground(Color.WHITE);
 		attributes.add(panel);
 	}
 	
@@ -90,17 +89,12 @@ public class Entity extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));		
 		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
 		
-//		attributes.setPreferredSize(new Dimension(50, 50));
-//		methods.setMinimumSize(new Dimension(50, 50));
-		
 		title.setLayout(new BoxLayout(title, BoxLayout.Y_AXIS));
 		attributes.setLayout(new BoxLayout(attributes, BoxLayout.Y_AXIS));
 		methods.setLayout(new BoxLayout(methods, BoxLayout.Y_AXIS));
 		
 		title.setBorder(new MatteBorder(1, 0, 1, 0, Color.black));
 		content.setBorder(new MatteBorder(0, 1, 1, 1, Color.black));
-		methods.setBorder(new MatteBorder(1, 0, 0, 0, Color.black));
-		
+		methods.setBorder(new MatteBorder(1, 0, 0, 0, Color.black));	
 	}
-
 }

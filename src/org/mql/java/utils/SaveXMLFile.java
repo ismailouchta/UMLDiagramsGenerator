@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.mql.java.models.Attribute;
 import org.mql.java.models.Classe;
 import org.mql.java.models.Package;
 import org.mql.java.models.Project;
@@ -58,9 +59,13 @@ public class SaveXMLFile {
 				if (cls.getAttributes() != null) {
 					Element atts = document.createElement("attributes");
 					c.appendChild(atts);
-					for (String att : cls.getAttributes()) {
+					for (Attribute att : cls.getAttributes()) {
 						Element at = document.createElement("attribute");
-						at.appendChild(document.createTextNode(att));
+						at.setAttribute("modifier", att.getModifier());
+						at.setAttribute("type", att.getType());
+						if (att.getModifier().contains("final"))
+						at.setAttribute("value", att.getValue().toString());
+						at.appendChild(document.createTextNode(att.getName()));
 						atts.appendChild(at);
 					}
 				}

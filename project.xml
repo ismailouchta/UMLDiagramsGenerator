@@ -1,1 +1,238 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project><packages><package name="org.mql.java.ui"><class modifier="public" name="ClassParserFrame"><attributes><attribute>- serialVersionUID : long = 1st4tic</attribute><attribute>- screen : JPanel</attribute><attribute>- content : JPanel</attribute><attribute>- draw : JPanel</attribute><attribute>- stats : JPanel</attribute><attribute>- scrollpane : JScrollPane</attribute></attributes><methods><method>+ ClassParserFrame()</method><method>+ init() : void</method><method>- config() : void</method><method>+ addEntity() : void</method><method>+ showF() : void</method></methods></class><class modifier="public" name="Entity"><attributes><attribute>- serialVersionUID : long = 1st4tic</attribute><attribute>- title : JPanel</attribute><attribute>- content : JPanel</attribute><attribute>- attributes : JPanel</attribute><attribute>- methods : JPanel</attribute></attributes><methods><method>+ Entity()</method><method>+ addMethod() : void</method><method>+ config() : void</method><method>+ addAttribute() : void</method></methods></class></package><package name="org.mql.java.utils"><class modifier="public" name="SaveXMLFile"><attributes><attribute>- p : Project</attribute><attribute>- document : Document</attribute><attribute>- packages : Element</attribute><attribute>- associations : Element</attribute></attributes><methods><method>+ SaveXMLFile()</method><method>+ save() : void</method><method>+ writePackages() : void</method><method>+ writeAssociations() : void</method><method>+ addAssociation() : void</method></methods></class><class modifier="public" name="PackageExplorer"><methods><method>+ PackageExplorer()</method><method>+ main() : voidst4tic</method><method>+ getClassList() : String[]</method></methods></class></package><package name="org.mql.java.models"><class modifier="public" name="Interface"><attributes><attribute># mod : String</attribute><attribute># name : String</attribute><attribute># attributes : Vector</attribute><attribute># methods : Vector</attribute><attribute># interfaces : Vector</attribute><attribute># inheritence : Vector</attribute></attributes><methods><method>+ Interface()</method><method>+ Interface()</method><method>+ getName() : String</method><method>+ getInterfaces() : Vector</method><method>+ getMethods() : List</method><method>+ setName() : void</method><method>+ getAttributes() : Vector</method><method>+ getMod() : String</method><method>+ setMod() : void</method><method>+ setMethods() : void</method><method>+ setAttributes() : void</method><method>+ setInterfaces() : void</method><method>+ getInheritence() : Vector</method><method>+ setInheritence() : void</method></methods></class><class modifier="public" name="Package"><attributes><attribute>- name : String</attribute><attribute>- classes : Vector</attribute><attribute>- interfaces : Vector</attribute></attributes><methods><method>+ Package()</method><method>+ getName() : String</method><method>+ getInterfaces() : Vector</method><method>+ getClasses() : Vector</method></methods></class><class modifier="public" name="Classe"><methods><method>+ Classe()</method></methods></class><class modifier="public" name="Project"><attributes><attribute>- name : String</attribute><attribute>- packages : Vector</attribute><attribute>- associations : List</attribute></attributes><methods><method>+ Project()</method><method>+ getName() : String</method><method>+ getPackages() : Vector</method><method>+ setPackages() : void</method><method>+ getAssociations() : List</method><method>+ addAssociation() : void</method></methods></class></package><package name="org.mql.java.testing"><class modifier="public final" name="Type"><attributes><attribute>+ CLASS : Type = CLASSst4tic</attribute><attribute>+ INTERFACE : Type = INTERFACEst4tic</attribute><attribute>+ ENUM : Type = ENUMst4tic</attribute><attribute>- ENUM$VALUES : Type[] = [Lorg.mql.java.testing.Type;@35bbe5e8st4tic</attribute></attributes><methods><method>+ values() : Type[]st4tic</method><method>+ valueOf() : Typest4tic</method></methods></class><class modifier="public" name="Test"><methods><method>+ Test()</method></methods></class></package><package name="org.mql.java.reflection"><class modifier="public" name="ProjectParser"><attributes><attribute>- project : Project</attribute><attribute>- packs : Set</attribute><attribute>- frame : ClassParserFrame</attribute><attribute> classesz : Setst4tic</attribute></attributes><methods><method>+ ProjectParser()</method><method>+ main() : voidst4tic</method><method>+ draw() : void</method><method>+ listOfPackage() : voidst4tic</method></methods></class><class modifier="public" name="ClassParser"><attributes><attribute>- project : Project</attribute><attribute>- temp : Classe</attribute></attributes><methods><method>+ ClassParser()</method><method>+ extract() : Classe</method><method>+ getInterfaces() : void</method><method>+ getMethods() : void</method><method>+ getAttributes() : void</method><method>+ getFirst() : void</method><method>+ getClasse() : Classe</method><method>+ getInheritence() : void</method><method>+ getInterface() : Interface</method></methods></class></package></packages><associations><association from="ClassParserFrame" to="JFrame" type="inheritance"/><association from="Entity" to="JPanel" type="inheritance"/><association from="Package" to="Classe" type="association"/><association from="Package" to="Interface" type="association"/><association from="Classe" to="Interface" type="inheritance"/><association from="Project" to="Package" type="association"/><association from="AnotherInterface" to="RandomInterface" type="inheritance"/><association from="AnotherInterface" to="randomClass" type="inheritance"/><association from="Type" to="Enum" type="inheritance"/><association from="Type" to="Type" type="association"/><association from="Type" to="Type" type="association"/><association from="Type" to="Type" type="association"/><association from="Test" to="randomClass" type="implementation"/><association from="ProjectParser" to="Project" type="association"/><association from="ProjectParser" to="ClassParserFrame" type="association"/><association from="ClassParser" to="Project" type="association"/><association from="ClassParser" to="Classe" type="association"/></associations></project>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project>
+	<packages>
+		<package name="org.mql.java.ui">
+			<class modifier="public" name="ClassParserFrame">
+				<attributes>
+					<attribute modifier="private static final" type="long"
+						value="1">serialVersionUID</attribute>
+					<attribute modifier="private" type="JPanel">screen</attribute>
+					<attribute modifier="private" type="JPanel">content</attribute>
+					<attribute modifier="private" type="JPanel">draw</attribute>
+					<attribute modifier="private" type="JPanel">stats</attribute>
+					<attribute modifier="private" type="JScrollPane">scrollpane</attribute>
+				</attributes>
+				<methods>
+					<method>+ ClassParserFrame()</method>
+					<method>+ init() : void</method>
+					<method>- config() : void</method>
+					<method>+ addEntity() : void</method>
+					<method>+ showF() : void</method>
+				</methods>
+			</class>
+			<class modifier="public" name="Entity">
+				<attributes>
+					<attribute modifier="private static final" type="long"
+						value="1">serialVersionUID</attribute>
+					<attribute modifier="private" type="JPanel">title</attribute>
+					<attribute modifier="private" type="JPanel">content</attribute>
+					<attribute modifier="private" type="JPanel">attributes</attribute>
+					<attribute modifier="private" type="JPanel">methods</attribute>
+				</attributes>
+				<methods>
+					<method>+ Entity()</method>
+					<method>+ addMethod() : void</method>
+					<method>+ config() : void</method>
+					<method>+ addAttribute() : void</method>
+				</methods>
+			</class>
+		</package>
+		<package name="org.mql.java.utils">
+			<class modifier="public" name="SaveXMLFile">
+				<attributes>
+					<attribute modifier="private" type="Project">p</attribute>
+					<attribute modifier="private" type="Document">document</attribute>
+					<attribute modifier="private" type="Element">packages</attribute>
+					<attribute modifier="private" type="Element">associations
+					</attribute>
+				</attributes>
+				<methods>
+					<method>+ SaveXMLFile()</method>
+					<method>+ save() : void</method>
+					<method>+ writePackages() : void</method>
+					<method>+ writeAssociations() : void</method>
+					<method>+ addAssociation() : void</method>
+				</methods>
+			</class>
+			<class modifier="public" name="PackageExplorer">
+				<methods>
+					<method>+ PackageExplorer()</method>
+					<method>+ main() : voidst4tic</method>
+					<method>+ getClassList() : String[]</method>
+				</methods>
+			</class>
+		</package>
+		<package name="org.mql.java.models">
+			<class modifier="public" name="Interface">
+				<attributes>
+					<attribute modifier="protected" type="String">mod</attribute>
+					<attribute modifier="protected" type="String">name</attribute>
+					<attribute modifier="protected" type="Vector">attributes
+					</attribute>
+					<attribute modifier="protected" type="Vector">methods</attribute>
+					<attribute modifier="protected" type="Vector">interfaces
+					</attribute>
+					<attribute modifier="protected" type="Vector">inheritence
+					</attribute>
+				</attributes>
+				<methods>
+					<method>+ Interface()</method>
+					<method>+ Interface()</method>
+					<method>+ getName() : String</method>
+					<method>+ getInterfaces() : Vector</method>
+					<method>+ getMethods() : List</method>
+					<method>+ setName() : void</method>
+					<method>+ getAttributes() : Vector</method>
+					<method>+ setAttributes() : void</method>
+					<method>+ setInterfaces() : void</method>
+					<method>+ getInheritence() : Vector</method>
+					<method>+ setInheritence() : void</method>
+					<method>+ getMod() : String</method>
+					<method>+ setMod() : void</method>
+					<method>+ setMethods() : void</method>
+				</methods>
+			</class>
+			<class modifier="public" name="Package">
+				<attributes>
+					<attribute modifier="private" type="String">name</attribute>
+					<attribute modifier="private" type="Vector">classes</attribute>
+					<attribute modifier="private" type="Vector">interfaces</attribute>
+				</attributes>
+				<methods>
+					<method>+ Package()</method>
+					<method>+ getName() : String</method>
+					<method>+ getInterfaces() : Vector</method>
+					<method>+ getClasses() : Vector</method>
+				</methods>
+			</class>
+			<class modifier="public" name="Classe">
+				<methods>
+					<method>+ Classe()</method>
+				</methods>
+			</class>
+			<class modifier="public" name="Project">
+				<attributes>
+					<attribute modifier="private" type="String">name</attribute>
+					<attribute modifier="private" type="Vector">packages</attribute>
+					<attribute modifier="private" type="List">associations
+					</attribute>
+				</attributes>
+				<methods>
+					<method>+ Project()</method>
+					<method>+ getName() : String</method>
+					<method>+ getPackages() : Vector</method>
+					<method>+ setPackages() : void</method>
+					<method>+ getAssociations() : List</method>
+					<method>+ addAssociation() : void</method>
+				</methods>
+			</class>
+			<class modifier="public" name="Attribute">
+				<attributes>
+					<attribute modifier="private" type="String">modifier</attribute>
+					<attribute modifier="private" type="String">name</attribute>
+					<attribute modifier="private" type="String">type</attribute>
+					<attribute modifier="private" type="Object">value</attribute>
+				</attributes>
+				<methods>
+					<method>+ Attribute()</method>
+					<method>+ getName() : String</method>
+					<method>+ getValue() : Object</method>
+					<method>+ setName() : void</method>
+					<method>+ setValue() : void</method>
+					<method>+ getType() : String</method>
+					<method>+ getModifier() : String</method>
+					<method>+ setModifier() : void</method>
+					<method>+ setType() : void</method>
+				</methods>
+			</class>
+		</package>
+		<package name="org.mql.java.testing">
+			<class modifier="public final" name="Type">
+				<attributes>
+					<attribute modifier="public static final" type="Type"
+						value="CLASS">CLASS</attribute>
+					<attribute modifier="public static final" type="Type"
+						value="INTERFACE">INTERFACE</attribute>
+					<attribute modifier="public static final" type="Type"
+						value="ENUM">ENUM</attribute>
+					<attribute modifier="private static final" type="Type[]"
+						value="[Lorg.mql.java.testing.Type;@2752f6e2">ENUM$VALUES</attribute>
+				</attributes>
+				<methods>
+					<method>+ values() : Type[]st4tic</method>
+					<method>+ valueOf() : Typest4tic</method>
+				</methods>
+			</class>
+			<class modifier="public" name="Test">
+				<methods>
+					<method>+ Test()</method>
+				</methods>
+			</class>
+		</package>
+		<package name="org.mql.java.reflection">
+			<class modifier="public" name="ProjectParser">
+				<attributes>
+					<attribute modifier="private" type="Project">project</attribute>
+					<attribute modifier="private" type="Set">packs</attribute>
+					<attribute modifier="private" type="ClassParserFrame">frame</attribute>
+					<attribute modifier="static" type="Set">classesz</attribute>
+				</attributes>
+				<methods>
+					<method>+ ProjectParser()</method>
+					<method>+ main() : voidst4tic</method>
+					<method>+ listOfPackage() : voidst4tic</method>
+					<method>+ draw() : void</method>
+				</methods>
+			</class>
+			<class modifier="public" name="ClassParser">
+				<attributes>
+					<attribute modifier="private" type="Project">project</attribute>
+					<attribute modifier="private" type="Classe">temp</attribute>
+				</attributes>
+				<methods>
+					<method>+ ClassParser()</method>
+					<method>+ extract() : Classe</method>
+					<method>+ getInterfaces() : void</method>
+					<method>+ getMethods() : void</method>
+					<method>+ getAttributes() : void</method>
+					<method>+ getFirst() : void</method>
+					<method>+ getInterface() : Interface</method>
+					<method>+ getInheritence() : void</method>
+					<method>+ getClasse() : Classe</method>
+				</methods>
+			</class>
+		</package>
+	</packages>
+	<associations>
+		<association from="ClassParserFrame" to="JFrame"
+			type="inheritance" />
+		<association from="Entity" to="JPanel" type="inheritance" />
+		<association from="Interface" to="Attribute"
+			type="association" />
+		<association from="Package" to="Classe" type="association" />
+		<association from="Package" to="Interface"
+			type="association" />
+		<association from="Classe" to="Interface"
+			type="inheritance" />
+		<association from="Project" to="Package"
+			type="association" />
+		<association from="AnotherInterface" to="RandomInterface"
+			type="inheritance" />
+		<association from="AnotherInterface" to="randomClass"
+			type="inheritance" />
+		<association from="Type" to="Enum" type="inheritance" />
+		<association from="Type" to="Type" type="association" />
+		<association from="Type" to="Type" type="association" />
+		<association from="Type" to="Type" type="association" />
+		<association from="Test" to="randomClass"
+			type="implementation" />
+		<association from="ProjectParser" to="Project"
+			type="association" />
+		<association from="ProjectParser" to="ClassParserFrame"
+			type="association" />
+		<association from="ClassParser" to="Project"
+			type="association" />
+		<association from="ClassParser" to="Classe"
+			type="association" />
+	</associations>
+</project>

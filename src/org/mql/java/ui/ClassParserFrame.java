@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.mql.java.models.Attribute;
 import org.mql.java.models.Classe;
 
 public class ClassParserFrame extends JFrame {
@@ -34,10 +35,39 @@ public class ClassParserFrame extends JFrame {
 		
 		Entity entity = new Entity(temp.getName(), type);
 
-		List<String> attributes = temp.getAttributes();
+//		List<String> attributes = temp.getAttributes();
+//		if (attributes != null) {
+//			for (int i = 0; i < attributes.size(); i++)
+//				entity.addAttribute(attributes.get(i));
+//		}
+		
+		List<Attribute> attributes = temp.getAttributes();
 		if (attributes != null) {
-			for (int i = 0; i < attributes.size(); i++)
-				entity.addAttribute(attributes.get(i));
+			for (int i = 0; i < attributes.size(); i++) {
+				String attribute = "";
+				boolean isStatic = false;
+				
+				String modifier = attributes.get(i).getModifier();
+				if (modifier.contains("private")) {
+					attribute += "-";
+				} else if (modifier.contains("protected")) {
+					attribute += "#";
+				} else if (modifier.contains("public")) {
+					attribute += "+";
+				}
+				
+				attribute += " " + attributes.get(i).getName();
+				attribute += " : " + attributes.get(i).getType();
+	
+				if (modifier.contains("final"))
+					attribute += " = " + attributes.get(i).getValue();
+	
+				if (modifier.contains("static")) {
+					isStatic = true;
+				}
+				
+				entity.addAttribute(attribute, isStatic);
+			}
 		}
 		
 		List<String> methods = temp.getMethods();

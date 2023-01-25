@@ -73,18 +73,11 @@ public class ProjectParser {
 		}
 		project.setPackages(packages);
 		
-
-
-		
-
-		
 		xml.writePackages();
 		xml.writeAssociations();
 		xml.save();
 		
 		draw();
-		
-		
 		
 	}
 	
