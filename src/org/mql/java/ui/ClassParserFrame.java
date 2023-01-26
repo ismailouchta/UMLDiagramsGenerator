@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 
 import org.mql.java.models.Attribute;
 import org.mql.java.models.Classe;
+import org.mql.java.models.Interface;
 import org.mql.java.models.Method;
 
 public class ClassParserFrame extends JFrame {
@@ -33,6 +34,75 @@ public class ClassParserFrame extends JFrame {
 	}
 	
 	public void addEntity(Classe temp, org.mql.java.testing.Type type) {
+		
+		Entity entity = new Entity(temp.getName(), type);
+		
+		List<Attribute> attributes = temp.getAttributes();
+		if (attributes != null) {
+			for (int i = 0; i < attributes.size(); i++) {
+				String attribute = "";
+				boolean isStatic = false;
+				
+				String modifier = attributes.get(i).getModifier();
+				if (modifier.contains("private")) {
+					attribute += "-";
+				} else if (modifier.contains("protected")) {
+					attribute += "#";
+				} else if (modifier.contains("public")) {
+					attribute += "+";
+				}
+				
+				attribute += " " + attributes.get(i).getName();
+				attribute += " : " + attributes.get(i).getType();
+	
+				if (modifier.contains("final"))
+					attribute += " = " + attributes.get(i).getValue();
+	
+				if (modifier.contains("static")) {
+					isStatic = true;
+				}
+				
+				entity.addAttribute(attribute, isStatic);
+			}
+		}
+		
+		List<Method> methods = temp.getMethods();
+		if (methods != null) {
+			for (int i = 0; i < methods.size(); i++) {
+
+				String method = "";
+				boolean isStatic = false;
+				
+				String modifier = methods.get(i).getModifier();
+				if (modifier.length() != 0) {
+					if (modifier.contains("private")) {
+						method += "-";
+					} else if (method.contains("protected")) {
+						method += "#";
+					} else if (method.contains("public")) {
+						method += "+";
+					} else {
+						method += "+";
+					}
+				} else {
+					method += "+";
+				}
+				method += " " + methods.get(i).getName() + "()";
+				
+				method += " : " + methods.get(i).getReturnType();
+				
+				if (modifier.contains("static")) {
+					isStatic = true;
+				}
+				
+				entity.addMethod(method, isStatic);
+			}
+		}
+
+		draw.add(entity);
+	}
+	
+	public void addEntity(Interface temp, org.mql.java.testing.Type type) {
 		
 		Entity entity = new Entity(temp.getName(), type);
 		

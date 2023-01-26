@@ -69,6 +69,7 @@
 				</methods>
 			</class>
 			<class modifier="public" name="PackageExplorer">
+				<attributes />
 				<methods>
 					<method modifier="public" returnType="">PackageExplorer
 					</method>
@@ -137,6 +138,7 @@
 				</methods>
 			</class>
 			<class modifier="public" name="Classe">
+				<attributes />
 				<methods>
 					<method modifier="public" returnType="">Classe</method>
 				</methods>
@@ -196,16 +198,19 @@
 				</methods>
 			</class>
 			<class modifier="public" name="Test">
+				<attributes />
 				<methods>
 					<method modifier="public" returnType="">Test</method>
 				</methods>
 			</class>
 			<interface modifier="public abstract interface"
 				name="AnotherInterface">
+				<attributes />
 				<methods />
 			</interface>
 			<interface modifier="public abstract interface"
 				name="randomClass">
+				<attributes />
 				<methods />
 			</interface>
 			<interface modifier="public abstract interface"

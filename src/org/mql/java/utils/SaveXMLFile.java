@@ -142,7 +142,7 @@ public class SaveXMLFile {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(document);
-			StreamResult result = new StreamResult(new File("project.xml"));
+			StreamResult result = new StreamResult(new File("huh.xml"));
 			transformer.transform(source, result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -20,6 +20,11 @@ public class ProjectParser {
 	private ClassParserFrame frame = new ClassParserFrame();
 
 	static Set<String> classesz;
+	
+	public ProjectParser(Project p) {
+		project = p;
+		draw();
+	}
 
 	public ProjectParser(String src) {
 		
@@ -78,7 +83,6 @@ public class ProjectParser {
 		xml.save();
 		
 		draw();
-		
 	}
 	
 	void draw() {
@@ -91,7 +95,8 @@ public class ProjectParser {
 				for (Classe c : classes) frame.addEntity(c, Type.CLASS);
 
 			if (!interfaces.isEmpty())
-				for (Interface i : interfaces) frame.addEntity((Classe) i, Type.INTERFACE);
+//				for (Interface i : interfaces) frame.addEntity((Classe) i, Type.INTERFACE);
+				for (Interface i : interfaces) frame.addEntity(i, Type.INTERFACE);
 		}
 		frame.showF();
 	}
