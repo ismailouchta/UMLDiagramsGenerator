@@ -14,9 +14,11 @@ import org.mql.java.testing.Type;
 public class Entity extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
+	private String name;
 	private JPanel title, content, attributes, methods;
 
 	public Entity(String name, Type type) {
+		this.name = name;
 		title = new JPanel();
 		attributes = new JPanel();
 		methods = new JPanel();
@@ -33,7 +35,7 @@ public class Entity extends JPanel {
 			
 			JPanel p = new JPanel();
 			p.setLayout(new FlowLayout(FlowLayout.CENTER));
-			JLabel label = new JLabel(name);
+			JLabel label = new JLabel(this.name);
 			Font f = label.getFont();
 			label.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
 			p.add(label);

@@ -9,25 +9,29 @@ import org.mql.java.models.Classe;
 import org.mql.java.models.Interface;
 import org.mql.java.models.Package;
 import org.mql.java.models.Project;
-import org.mql.java.testing.Type;
-import org.mql.java.ui.ClassParserFrame;
-import org.mql.java.utils.SaveXMLFile;
 
 public class ProjectParser {
 	
 	private Project project;
 	private Set<String> packs;
-	private ClassParserFrame frame = new ClassParserFrame();
+//	private ClassParserFrame frame = new ClassParserFrame();
 
 	static Set<String> classesz;
 	
 	public ProjectParser(Project p) {
 		project = p;
-		draw();
+//		draw();
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public ProjectParser(String src) {
-		
 		packs = new HashSet<>();
 		listOfPackage(src,packs);
 		classesz = new HashSet<>();
@@ -36,7 +40,7 @@ public class ProjectParser {
 		
 		project = new Project("Random Project", packages);
 		
-		SaveXMLFile xml = new SaveXMLFile(project);
+//		SaveXMLFile xml = new SaveXMLFile(project);
 		
 		for (String p : packs) {			
 			File directory = new File(src+p.replace(".", "/")+"/");
@@ -78,28 +82,28 @@ public class ProjectParser {
 		}
 		project.setPackages(packages);
 		
-		xml.writePackages();
-		xml.writeAssociations();
-		xml.save();
-		
-		draw();
+//		xml.writePackages();
+//		xml.writeAssociations();
+//		xml.save();
+//		
+//		draw();
 	}
 	
-	void draw() {
-		Vector<Package> packc = project.getPackages();
-		for (Package p : packc) {
-			Vector<Classe> classes = p.getClasses();
-			Vector<Interface> interfaces = p.getInterfaces();
-
-			if (!classes.isEmpty())
-				for (Classe c : classes) frame.addEntity(c, Type.CLASS);
-
-			if (!interfaces.isEmpty())
-//				for (Interface i : interfaces) frame.addEntity((Classe) i, Type.INTERFACE);
-				for (Interface i : interfaces) frame.addEntity(i, Type.INTERFACE);
-		}
-		frame.showF();
-	}
+//	void draw() {
+//		Vector<Package> packc = project.getPackages();
+//		for (Package p : packc) {
+//			Vector<Classe> classes = p.getClasses();
+//			Vector<Interface> interfaces = p.getInterfaces();
+//
+//			if (!classes.isEmpty())
+//				for (Classe c : classes) frame.addEntity(c, Type.CLASS);
+//
+//			if (!interfaces.isEmpty())
+////				for (Interface i : interfaces) frame.addEntity((Classe) i, Type.INTERFACE);
+//				for (Interface i : interfaces) frame.addEntity(i, Type.INTERFACE);
+//		}
+//		frame.showF();
+//	}
 	
     public static void listOfPackage(String directoryName, Set<String> pack) {
 	    	File directory = new File(directoryName);
@@ -114,7 +118,7 @@ public class ProjectParser {
 	    	}
     }
     
-    public static void main(String[] args) {
-    		new ProjectParser("/Users/ismailouchta/eclipse-workspace/UMLDiagramsGenerator/src/");
-    }
+//    public static void main(String[] args) {
+//    		new ProjectParser("/Users/ismailouchta/eclipse-workspace/UMLDiagramsGenerator/src/");
+//    }
 }

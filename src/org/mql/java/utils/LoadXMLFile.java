@@ -21,12 +21,12 @@ public class LoadXMLFile {
 	private Document document;
 	private Project project;
 
-	public LoadXMLFile() {
+	public LoadXMLFile(String fileName) {
 		try {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		
-		document = builder.parse(new File("project.xml"));
+		document = builder.parse(new File(fileName));
 		
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -164,8 +164,13 @@ public class LoadXMLFile {
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		new LoadXMLFile();
+
+	public Project getProject() {
+		return project;
 	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+	
 }

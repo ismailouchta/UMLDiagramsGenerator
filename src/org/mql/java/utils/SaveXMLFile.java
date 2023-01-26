@@ -20,11 +20,13 @@ import org.w3c.dom.Element;
 
 public class SaveXMLFile {
 	private Project p;
+	private String fileName;
 	private Document document;
 	private Element packages, associations;
 
-	public SaveXMLFile(Project p) {
+	public SaveXMLFile(Project p, String fileName) {
 		this.p = p;
+		this.fileName = fileName;
 
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -40,6 +42,9 @@ public class SaveXMLFile {
 
 			associations = document.createElement("associations");
 			project.appendChild(associations);
+			
+			writePackages();
+			writeAssociations();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -142,7 +147,7 @@ public class SaveXMLFile {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(document);
-			StreamResult result = new StreamResult(new File("huh.xml"));
+			StreamResult result = new StreamResult(new File(fileName));
 			transformer.transform(source, result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

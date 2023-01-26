@@ -2,9 +2,10 @@ package org.mql.java.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -15,22 +16,57 @@ import org.mql.java.models.Attribute;
 import org.mql.java.models.Classe;
 import org.mql.java.models.Interface;
 import org.mql.java.models.Method;
+import org.mql.java.models.Project;
+import org.mql.java.reflection.ProjectParser;
+import org.mql.java.utils.LoadXMLFile;
+import org.mql.java.utils.SaveXMLFile;
 
 public class ClassParserFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	private JPanel screen, content, draw, stats;
+	private JPanel screen, content, draw, utils;
 	private JScrollPane scrollpane;
 	
+	private Project project;
+	
 	public ClassParserFrame() {
+		
+		ProjectParser pp;
+		pp = new ProjectParser("/Users/ismailouchta/eclipse-workspace/UMLDiagramsGenerator/src/");
+		project = pp.getProject();
+		
 		screen = new JPanel();
 		content = new JPanel();
-		stats = new JPanel();
+		utils = new JPanel();
 		draw = new JPanel();
-		
 		draw.setBackground(Color.WHITE);
-		
 		init();
+		
+//		draw();
+		
+		SaveXMLFile SaveXML = new SaveXMLFile(project,	"a.xml");
+		SaveXML.save();
+		
+		LoadXMLFile loadXML = new LoadXMLFile("a.xml");
+		project = loadXML.getProject();
+		
+		showF();
+	}
+
+	void draw() {
+		draw.removeAll();
+		Vector<org.mql.java.models.Package> packc = project.getPackages();
+		for (org.mql.java.models.Package p : packc) {
+			Vector<Classe> classes = p.getClasses();
+			Vector<Interface> interfaces = p.getInterfaces();
+	
+			if (!classes.isEmpty())
+				for (Classe c : classes) addEntity(c, org.mql.java.testing.Type.CLASS);
+	
+			if (!interfaces.isEmpty())
+				for (Interface i : interfaces) addEntity(i, org.mql.java.testing.Type.INTERFACE);
+		}
+		draw.revalidate();
 	}
 	
 	public void addEntity(Classe temp, org.mql.java.testing.Type type) {
@@ -182,19 +218,39 @@ public class ClassParserFrame extends JFrame {
 	
 	void init() { 
 		screen.setLayout(new FlowLayout(FlowLayout.CENTER));
-		stats.setLayout(new BoxLayout(stats, BoxLayout.Y_AXIS));
+		utils.setLayout(new BoxLayout(utils, BoxLayout.Y_AXIS));
 		content.setLayout(new BorderLayout());
 	}
 
 	public void showF() {
+		
+		draw.setPreferredSize(new Dimension(1500, 1500));
+		
 		scrollpane = new JScrollPane(draw);
-		scrollpane.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize()); // Full Screen
+//		scrollpane.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize()); // Full Screen
+		scrollpane.setPreferredSize(new Dimension(1000, 700));
 		scrollpane.getVerticalScrollBar().setUnitIncrement(16);
 		scrollpane.getHorizontalScrollBar().setUnitIncrement(16);
 		content.add(scrollpane, BorderLayout.CENTER);
+
+		utils.setPreferredSize(new Dimension(250, 700));
 				
 		screen.add(content);
+//		screen.add(utils);
+		screen.add(new utils(this));
 		setContentPane(screen);
 		config();
+	}
+	
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public static void main(String[] args) {
+		new ClassParserFrame();
 	}
 }
