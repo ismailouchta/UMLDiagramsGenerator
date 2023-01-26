@@ -18,8 +18,6 @@ import org.mql.java.models.Interface;
 import org.mql.java.models.Method;
 import org.mql.java.models.Project;
 import org.mql.java.reflection.ProjectParser;
-import org.mql.java.utils.LoadXMLFile;
-import org.mql.java.utils.SaveXMLFile;
 
 public class ClassParserFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -30,9 +28,7 @@ public class ClassParserFrame extends JFrame {
 	private Project project;
 	
 	public ClassParserFrame() {
-		
-		ProjectParser pp;
-		pp = new ProjectParser("/Users/ismailouchta/eclipse-workspace/UMLDiagramsGenerator/src/");
+		ProjectParser pp = new ProjectParser("/Users/ismailouchta/eclipse-workspace/UMLDiagramsGenerator/src/");
 		project = pp.getProject();
 		
 		screen = new JPanel();
@@ -41,15 +37,6 @@ public class ClassParserFrame extends JFrame {
 		draw = new JPanel();
 		draw.setBackground(Color.WHITE);
 		init();
-		
-//		draw();
-		
-		SaveXMLFile SaveXML = new SaveXMLFile(project,	"a.xml");
-		SaveXML.save();
-		
-		LoadXMLFile loadXML = new LoadXMLFile("a.xml");
-		project = loadXML.getProject();
-		
 		showF();
 	}
 
@@ -223,7 +210,6 @@ public class ClassParserFrame extends JFrame {
 	}
 
 	public void showF() {
-		
 		draw.setPreferredSize(new Dimension(1500, 1500));
 		
 		scrollpane = new JScrollPane(draw);
@@ -236,7 +222,6 @@ public class ClassParserFrame extends JFrame {
 		utils.setPreferredSize(new Dimension(250, 700));
 				
 		screen.add(content);
-//		screen.add(utils);
 		screen.add(new utils(this));
 		setContentPane(screen);
 		config();

@@ -16,11 +16,27 @@ public class ClassParser {
 
 	private Project project;
 	private Classe temp;
+	
+	public ClassParser(String className) {
+		try {
+			
+//			System.out.println(className);
+//			Class<?> cls = Class.forName(className);
+			
+			Class<?> cls = Class.forName(className);
+			temp = extract(cls);
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
 
 	public ClassParser(String className, Project project) {
 		this.project = project;
 		
 		try {
+			
+			System.out.println(className);
+			
 			Class<?> cls = Class.forName(className);
 			temp = extract(cls);
 		} catch (Exception e) {
@@ -178,5 +194,9 @@ public class ClassParser {
 			methodes.add(method);
 		}
 		temp.setMethods(methodes);
+	}
+	
+	public static void main(String[] args) {
+		new ClassParser("cc");
 	}
 }

@@ -21,11 +21,14 @@ public class utils extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	private Project project;
-	private JButton load;
-	private JButton save;
+	private JButton demo, select, save, load;
 	private ClassParserFrame frame;
 
 	public utils(ClassParserFrame frame) {
+		
+//		frame.draw();
+		
+		project = frame.getProject();
 		this.frame = frame;
 		init();
 	}
@@ -35,9 +38,16 @@ public class utils extends JPanel implements ActionListener {
 		setBorder(new EmptyBorder(20, 20, 20, 20));
 		setPreferredSize(new Dimension(250, 700));
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+		add(new JLabel("Demo"));
+		demo = new JButton("Draw");
+		demo.addActionListener(this);
+		add(demo);
 		
 		add(new JLabel("Draw UML from project"));
-		add(new JButton("Draw"));
+		select = new JButton("Select");
+		select.addActionListener(this);
+		add(select);
 		
 		add(new JLabel("Save UML as XML file"));
 		save = new JButton("Save File");
@@ -52,7 +62,16 @@ public class utils extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == load) {
+		if (e.getSource() == demo) {
+			frame.draw();
+		} else if (e.getSource() == select) {
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			int response = fileChooser.showOpenDialog(null);
+			if (response == JFileChooser.APPROVE_OPTION) {
+//				System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
+			}
+		} else if (e.getSource() == load) {
 			JFileChooser fileChooser = new JFileChooser();
 			int response = fileChooser.showOpenDialog(null);
 			if (response == JFileChooser.APPROVE_OPTION) {
@@ -61,8 +80,7 @@ public class utils extends JPanel implements ActionListener {
 				frame.setProject(project);
 				frame.draw();
 			}
-		}
-		else if (e.getSource() == save) {
+		} else if (e.getSource() == save) {
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setSelectedFile(new File("project.xml"));
 			int response = fileChooser.showSaveDialog(null);

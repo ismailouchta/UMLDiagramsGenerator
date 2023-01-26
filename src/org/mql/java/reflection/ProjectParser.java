@@ -11,24 +11,13 @@ import org.mql.java.models.Package;
 import org.mql.java.models.Project;
 
 public class ProjectParser {
-	
 	private Project project;
 	private Set<String> packs;
-//	private ClassParserFrame frame = new ClassParserFrame();
 
 	static Set<String> classesz;
 	
 	public ProjectParser(Project p) {
 		project = p;
-//		draw();
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
 	}
 
 	public ProjectParser(String src) {
@@ -39,8 +28,6 @@ public class ProjectParser {
 		Vector<Package> packages = new Vector<Package>();
 		
 		project = new Project("Random Project", packages);
-		
-//		SaveXMLFile xml = new SaveXMLFile(project);
 		
 		for (String p : packs) {			
 			File directory = new File(src+p.replace(".", "/")+"/");
@@ -81,29 +68,15 @@ public class ProjectParser {
 			packages.add(pack);
 		}
 		project.setPackages(packages);
-		
-//		xml.writePackages();
-//		xml.writeAssociations();
-//		xml.save();
-//		
-//		draw();
 	}
 	
-//	void draw() {
-//		Vector<Package> packc = project.getPackages();
-//		for (Package p : packc) {
-//			Vector<Classe> classes = p.getClasses();
-//			Vector<Interface> interfaces = p.getInterfaces();
-//
-//			if (!classes.isEmpty())
-//				for (Classe c : classes) frame.addEntity(c, Type.CLASS);
-//
-//			if (!interfaces.isEmpty())
-////				for (Interface i : interfaces) frame.addEntity((Classe) i, Type.INTERFACE);
-//				for (Interface i : interfaces) frame.addEntity(i, Type.INTERFACE);
-//		}
-//		frame.showF();
-//	}
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 	
     public static void listOfPackage(String directoryName, Set<String> pack) {
 	    	File directory = new File(directoryName);
@@ -117,8 +90,4 @@ public class ProjectParser {
 	    		  listOfPackage(f.getAbsolutePath(), pack);
 	    	}
     }
-    
-//    public static void main(String[] args) {
-//    		new ProjectParser("/Users/ismailouchta/eclipse-workspace/UMLDiagramsGenerator/src/");
-//    }
 }
