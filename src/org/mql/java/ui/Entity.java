@@ -97,4 +97,12 @@ public class Entity extends JPanel {
 		content.setBorder(new MatteBorder(0, 1, 1, 1, Color.black));
 		methods.setBorder(new MatteBorder(1, 0, 0, 0, Color.black));	
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

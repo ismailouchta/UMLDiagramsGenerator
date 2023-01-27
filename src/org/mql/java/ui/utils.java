@@ -24,6 +24,7 @@ public class utils extends JPanel implements ActionListener {
 	private Project project;
 	private JButton demo, select, save, load;
 	private ClassParserFrame frame;
+	private JButton test;
 
 	public utils(ClassParserFrame frame) {
 		project = frame.getProject();
@@ -43,7 +44,7 @@ public class utils extends JPanel implements ActionListener {
 		add(demo);
 		
 		add(new JLabel("Draw UML from project"));
-		select = new JButton("Select");
+		select = new JButton("Select Project");
 		select.addActionListener(this);
 		add(select);
 		
@@ -56,6 +57,11 @@ public class utils extends JPanel implements ActionListener {
 		load = new JButton("Select File");
 		load.addActionListener(this);
 		add(load);
+		
+		add(new JLabel("test"));
+		test = new JButton("test");
+		test.addActionListener(this);
+		add(test);
 	}
 
 	@Override
@@ -68,6 +74,7 @@ public class utils extends JPanel implements ActionListener {
 				project = pp.getProject();
 				frame.setProject(project);
 				frame.draw();
+				frame.addAssociations();
 			} catch (Exception e1) {
 				e1.getMessage();
 			}
@@ -99,6 +106,10 @@ public class utils extends JPanel implements ActionListener {
 						fileChooser.getSelectedFile().getAbsolutePath());
 				saveXML.save();
 			}
+		}
+		
+		else if (e.getSource() == test) {
+			frame.addAssociations();
 		}
 	}
 }

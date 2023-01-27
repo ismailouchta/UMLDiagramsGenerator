@@ -30,7 +30,10 @@ public class ProjectParser {
 		
 		Vector<Package> packages = new Vector<Package>();
 		
-		project = new Project("Random Project", packages);
+		String segments[] = src.split("/");
+		String projectName = segments[segments.length - 1];
+		
+		project = new Project(projectName, packages);
 		
 		for (String p : packs) {
 			File directory = new File(src+"/bin/"+p.replace(".", "/")+"/");

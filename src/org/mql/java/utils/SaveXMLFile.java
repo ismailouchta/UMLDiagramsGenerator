@@ -35,6 +35,7 @@ public class SaveXMLFile {
 			document = dbuilder.newDocument();
 
 			Element project = document.createElement("project");
+			project.setAttribute("name", p.getName());
 			document.appendChild(project);
 
 			packages = document.createElement("packages");

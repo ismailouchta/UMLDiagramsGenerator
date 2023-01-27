@@ -23,11 +23,9 @@ public class ClassParser {
 	public ClassParser(String src, String className, Project project) {
 		this.project = project;
 			
-		System.out.println("1");
-		
+//		System.out.println("1");
 		try {
-		
-			System.out.println("2");
+//			System.out.println("2");
 			
 			File f = new File(src+"/bin");
 			URL[] cp = {f.toURI().toURL()};
@@ -35,7 +33,7 @@ public class ClassParser {
 			try (URLClassLoader urlcl = new URLClassLoader(cp))  {
 				Class<?> cls  = urlcl.loadClass(className);
 
-				System.out.println("3");
+//				System.out.println("3");
 				
 				temp = extract(cls);
 			} catch (Exception e) {

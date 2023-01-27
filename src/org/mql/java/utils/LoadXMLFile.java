@@ -33,10 +33,11 @@ public class LoadXMLFile {
 		}
 		
 		document.getDocumentElement().normalize();
+		Element root = document.getDocumentElement();
 		
 		Vector<Package> packages = new Vector<Package>();
 		
-		project = new Project("Random project", packages);
+		project = new Project(root.getAttribute("name"), packages);
 		
 		// Extract Packages
 		NodeList packs = document.getElementsByTagName("package");
