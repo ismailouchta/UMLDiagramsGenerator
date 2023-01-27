@@ -1,9 +1,12 @@
 package org.mql.java.reflection;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Set;
 import java.util.Vector;
 
@@ -17,28 +20,27 @@ public class ClassParser {
 	private Project project;
 	private Classe temp;
 	
-	public ClassParser(String className) {
-		try {
-			
-//			System.out.println(className);
-//			Class<?> cls = Class.forName(className);
-			
-			Class<?> cls = Class.forName(className);
-			temp = extract(cls);
-		} catch (Exception e) {
-			e.getMessage();
-		}
-	}
-
-	public ClassParser(String className, Project project) {
+	public ClassParser(String src, String className, Project project) {
 		this.project = project;
+			
+		System.out.println("1");
 		
 		try {
+		
+			System.out.println("2");
 			
-			System.out.println(className);
+			File f = new File(src+"/bin");
+			URL[] cp = {f.toURI().toURL()};
 			
-			Class<?> cls = Class.forName(className);
-			temp = extract(cls);
+			try (URLClassLoader urlcl = new URLClassLoader(cp))  {
+				Class<?> cls  = urlcl.loadClass(className);
+
+				System.out.println("3");
+				
+				temp = extract(cls);
+			} catch (Exception e) {
+				e.getMessage();
+			}
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -196,7 +198,4 @@ public class ClassParser {
 		temp.setMethods(methodes);
 	}
 	
-	public static void main(String[] args) {
-		new ClassParser("cc");
-	}
 }

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.mql.java.models.Project;
+import org.mql.java.reflection.ProjectParser;
 import org.mql.java.utils.LoadXMLFile;
 import org.mql.java.utils.SaveXMLFile;
 
@@ -25,9 +26,6 @@ public class utils extends JPanel implements ActionListener {
 	private ClassParserFrame frame;
 
 	public utils(ClassParserFrame frame) {
-		
-//		frame.draw();
-		
 		project = frame.getProject();
 		this.frame = frame;
 		init();
@@ -63,13 +61,25 @@ public class utils extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == demo) {
-			frame.draw();
+			File currentDirFile = new File("");
+			try {
+				String currentDir = currentDirFile.getAbsolutePath();
+				ProjectParser pp = new ProjectParser(currentDir);
+				project = pp.getProject();
+				frame.setProject(project);
+				frame.draw();
+			} catch (Exception e1) {
+				e1.getMessage();
+			}
 		} else if (e.getSource() == select) {
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			int response = fileChooser.showOpenDialog(null);
 			if (response == JFileChooser.APPROVE_OPTION) {
-//				System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
+				ProjectParser pp = new ProjectParser(fileChooser.getSelectedFile().getAbsolutePath());
+				project = pp.getProject();
+				frame.setProject(pp.getProject());
+				frame.draw();
 			}
 		} else if (e.getSource() == load) {
 			JFileChooser fileChooser = new JFileChooser();

@@ -17,7 +17,6 @@ import org.mql.java.models.Classe;
 import org.mql.java.models.Interface;
 import org.mql.java.models.Method;
 import org.mql.java.models.Project;
-import org.mql.java.reflection.ProjectParser;
 
 public class ClassParserFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -28,8 +27,6 @@ public class ClassParserFrame extends JFrame {
 	private Project project;
 	
 	public ClassParserFrame() {
-		ProjectParser pp = new ProjectParser("/Users/ismailouchta/eclipse-workspace/UMLDiagramsGenerator/src/");
-		project = pp.getProject();
 		
 		screen = new JPanel();
 		content = new JPanel();
@@ -41,6 +38,7 @@ public class ClassParserFrame extends JFrame {
 	}
 
 	void draw() {
+		if (project != null) {
 		draw.removeAll();
 		Vector<org.mql.java.models.Package> packc = project.getPackages();
 		for (org.mql.java.models.Package p : packc) {
@@ -48,12 +46,20 @@ public class ClassParserFrame extends JFrame {
 			Vector<Interface> interfaces = p.getInterfaces();
 	
 			if (!classes.isEmpty())
-				for (Classe c : classes) addEntity(c, org.mql.java.testing.Type.CLASS);
+				for (Classe c : classes) {
+					if (c != null)
+					addEntity(c, org.mql.java.testing.Type.CLASS);
+					
+				}
 	
-			if (!interfaces.isEmpty())
-				for (Interface i : interfaces) addEntity(i, org.mql.java.testing.Type.INTERFACE);
+			if (!interfaces.isEmpty())			
+				for (Interface i : interfaces) {
+					if (i != null)
+					addEntity(i, org.mql.java.testing.Type.INTERFACE);
+				}
 		}
 		draw.revalidate();
+		}
 	}
 	
 	public void addEntity(Classe temp, org.mql.java.testing.Type type) {

@@ -1,6 +1,8 @@
 package org.mql.java.reflection;
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -22,15 +24,16 @@ public class ProjectParser {
 
 	public ProjectParser(String src) {
 		packs = new HashSet<>();
-		listOfPackage(src,packs);
+		listOfPackage(src+"/bin",packs);
+		
 		classesz = new HashSet<>();
 		
 		Vector<Package> packages = new Vector<Package>();
 		
 		project = new Project("Random Project", packages);
 		
-		for (String p : packs) {			
-			File directory = new File(src+p.replace(".", "/")+"/");
+		for (String p : packs) {
+			File directory = new File(src+"/bin/"+p.replace(".", "/")+"/");
 			File[] contents = directory.listFiles();
 			
 			Vector<Classe> classes = new Vector<Classe>();
@@ -38,28 +41,32 @@ public class ProjectParser {
 			
 			for ( File fc : contents) {
 		    	  if (fc.isFile()) {
-		    		  String className = fc.getName().replace(".java", "");
+		    		  String className = fc.getName().replace(".class", "");
 		    		  classesz.add(p + "." + className);
 		    	  }
 			}
 			
 			for ( File f : contents) {
 		    	  if (f.isFile()) {
-		    		  
-		    		String className = f.getName().replace(".java", "");
+		    		String className = f.getName().replace(".class", "");
 
 					try {
-						Class<?> cls = Class.forName(p + "." + className);
-						ClassParser classparser = new ClassParser(p + "." + className, project);
+						File ff = new File(src+"/bin");
+						URL[] cp = {ff.toURI().toURL()};
+						try (URLClassLoader urlcl = new URLClassLoader(cp)) {
+							Class<?> cls  = urlcl.loadClass(p+"."+className);
+						ClassParser classparser = new ClassParser(
+								src+"/bin/",p + "." + className, project);
 						
-						if (cls.isInterface()) {
-							interfaces.add(classparser.getInterface()); // add classe
-						} else {
-							classes.add(classparser.getClasse());
+							if (cls.isInterface()) {
+								interfaces.add(classparser.getInterface()); // add classe
+							} else {
+								classes.add(classparser.getClasse());
+							}
 						}
 						
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
+						} catch (Exception e) {
+						e.getMessage();
 					}
 		    	  }
 			}
@@ -70,6 +77,21 @@ public class ProjectParser {
 		project.setPackages(packages);
 	}
 	
+    public static void listOfPackage(String directoryName, Set<String> pack) {
+	    	File directory = new File(directoryName);
+	    	File[] contents = directory.listFiles();
+//	    	if (contents != null)
+		    	for ( File f : contents) {
+		    	  if (f.isFile()) {
+		    		  String path = f.getPath();
+		    		  String packName = path.substring(path.indexOf("bin")+4, path.lastIndexOf('/'));
+		    		  packName = packName.replace('/', '.');
+		    		  pack.add(packName);
+		    	  } else if (f.isDirectory())
+		    		  listOfPackage(f.getAbsolutePath(), pack);
+		    	}
+    }
+
 	public Project getProject() {
 		return project;
 	}
@@ -77,17 +99,4 @@ public class ProjectParser {
 	public void setProject(Project project) {
 		this.project = project;
 	}
-	
-    public static void listOfPackage(String directoryName, Set<String> pack) {
-	    	File directory = new File(directoryName);
-	    	File[] contents = directory.listFiles();
-	    	for ( File f : contents) {
-	    	  if (f.isFile()) {
-	    		  String path = f.getPath();
-	    		  String packName = path.substring(path.indexOf("src")+4, path.lastIndexOf('/'));
-	    		  pack.add(packName.replace('/', '.'));
-	    	  } else if (f.isDirectory())
-	    		  listOfPackage(f.getAbsolutePath(), pack);
-	    	}
-    }
 }
