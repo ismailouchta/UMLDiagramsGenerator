@@ -12,21 +12,19 @@ public class Draw extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private LinkedList<Association> associations;
-	
-	private int i = 0;
 
 	public Draw() {
 		
 	}
 
+	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		paintAssociations(g);
-//		System.out.println(i++);
-		
 	}
 
 	public void paintAssociations(Graphics g) {
-		if (associations != null)
+		if (associations != null) {
 			for (Association a : associations) {
 				if (a.getType().equals("implementation")) {
 					Graphics2D g2d = (Graphics2D) g.create();
@@ -35,11 +33,13 @@ public class Draw extends JPanel {
 		            g2d.setStroke(dashed);
 		            g2d.drawLine(a.getX1(), a.getY1(), a.getX2(), a.getY2());
 		            g2d.dispose(); //gets rid of the copy
-					
 				} else {
 					g.drawLine(a.getX1(), a.getY1(), a.getX2(), a.getY2());
+					
+					System.out.println("executed");
 				}
 			}
+		}
 	}
 
 	public LinkedList<Association> getAssociations() {

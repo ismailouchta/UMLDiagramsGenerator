@@ -30,12 +30,10 @@ public class ClassParserFrame extends JFrame {
 	private Project project;
 
 	public ClassParserFrame() {
-
 		screen = new JPanel();
 		content = new JPanel();
 		utils = new JPanel();
 		draw = new Draw();
-		draw.setBackground(Color.WHITE);
 		init();
 		showF();
 	}
@@ -63,6 +61,7 @@ public class ClassParserFrame extends JFrame {
 					}
 			}
 			draw.revalidate();
+			addAssociations();
 			draw.repaint();
 		}
 	}
@@ -209,7 +208,7 @@ public class ClassParserFrame extends JFrame {
 
 	private void config() {
 		getContentPane().setBackground(Color.white);
-		setTitle("UML Diagrams Generator - Java Project");
+		setTitle("UML Diagrams Generator");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
@@ -252,7 +251,7 @@ public class ClassParserFrame extends JFrame {
 		new ClassParserFrame();
 	}
 
-	public void addAssociations() {
+	public void addAssociations() {		
 		if (project != null ) {
 			List<String> links = project.getAssociations();
 			LinkedList<Association> associations = new LinkedList<Association>() ;
@@ -273,11 +272,11 @@ public class ClassParserFrame extends JFrame {
 			}
 			draw.setAssociations(associations);
 			
-			draw.repaint();
-			draw.revalidate();
+			repaint();
+			revalidate();
 		}
 	}
-	
+
 	public Component getEntity(String name) {
 		Component[] units = draw.getComponents();
 		for (Component e : units) {

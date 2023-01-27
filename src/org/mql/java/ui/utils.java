@@ -78,7 +78,7 @@ public class utils extends JPanel implements ActionListener {
 			} catch (Exception e1) {
 				e1.getMessage();
 			}
-		} else if (e.getSource() == select) {
+		} else if (e.getSource() == select) {			
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			int response = fileChooser.showOpenDialog(null);
@@ -108,8 +108,8 @@ public class utils extends JPanel implements ActionListener {
 			}
 		}
 		
-		else if (e.getSource() == test) {
-			frame.addAssociations();
-		}
+//		else if (e.getSource() == test) {
+//			frame.addAssociations();
+//		}
 	}
 }
