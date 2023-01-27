@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -24,7 +25,7 @@ public class utils extends JPanel implements ActionListener {
 	private Project project;
 	private JButton demo, select, save, load;
 	private ClassParserFrame frame;
-	private JButton test;
+//	private JButton test;
 
 	public utils(ClassParserFrame frame) {
 		project = frame.getProject();
@@ -58,10 +59,10 @@ public class utils extends JPanel implements ActionListener {
 		load.addActionListener(this);
 		add(load);
 		
-		add(new JLabel("test"));
-		test = new JButton("test");
-		test.addActionListener(this);
-		add(test);
+//		add(new JLabel("test"));
+//		test = new JButton("test");
+//		test.addActionListener(this);
+//		add(test);
 	}
 
 	@Override
@@ -93,19 +94,28 @@ public class utils extends JPanel implements ActionListener {
 			JFileChooser fileChooser = new JFileChooser();
 			int response = fileChooser.showOpenDialog(null);
 			if (response == JFileChooser.APPROVE_OPTION) {
-				LoadXMLFile loadxml = new LoadXMLFile(fileChooser.getSelectedFile().getAbsolutePath());
-				project = loadxml.getProject();
-				frame.setProject(project);
-				frame.draw();
+				String link = fileChooser.getSelectedFile().getAbsolutePath();
+				if (link.contains(".xml")) {					
+					LoadXMLFile loadxml = new LoadXMLFile(fileChooser.getSelectedFile().getAbsolutePath());
+					project = loadxml.getProject();
+					frame.setProject(project);
+					frame.draw();
+				} else {
+					JOptionPane.showMessageDialog(null,"Please select .xml file.","Message",2);
+				}
 			}
 		} else if (e.getSource() == save) {
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setSelectedFile(new File("project.xml"));
-			int response = fileChooser.showSaveDialog(null);
-			if (response == JFileChooser.APPROVE_OPTION) {
-				SaveXMLFile saveXML = new SaveXMLFile(project,
-						fileChooser.getSelectedFile().getAbsolutePath());
-				saveXML.save();
+			if (frame.getProject() != null) {				
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setSelectedFile(new File("project.xml"));
+				int response = fileChooser.showSaveDialog(null);
+				if (response == JFileChooser.APPROVE_OPTION) {
+					SaveXMLFile saveXML = new SaveXMLFile(project,
+							fileChooser.getSelectedFile().getAbsolutePath());
+					saveXML.save();
+				}
+			} else {
+				JOptionPane.showMessageDialog(null,"Open a project first.","Message",2);
 			}
 		}
 		

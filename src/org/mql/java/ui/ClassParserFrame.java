@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -210,8 +211,10 @@ public class ClassParserFrame extends JFrame {
 	private void config() {
 		getContentPane().setBackground(Color.white);
 		setTitle("UML Diagrams Generator");
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		setLocationRelativeTo(null);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-1250/2, dim.height/2-700/2);
 		pack();
 		setVisible(true);
 	}
@@ -222,9 +225,8 @@ public class ClassParserFrame extends JFrame {
 		content.setLayout(new BorderLayout());
 	}
 
-	public void showF() {
+	public void showF() {		
 		draw.setPreferredSize(new Dimension(1500, 1500));
-
 		scrollpane = new JScrollPane(draw);
 //		scrollpane.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize()); // Full Screen
 		scrollpane.setPreferredSize(new Dimension(1000, 700));
