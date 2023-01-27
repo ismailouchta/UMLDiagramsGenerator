@@ -75,6 +75,7 @@ public class utils extends JPanel implements ActionListener {
 				frame.setProject(project);
 				frame.draw();
 				frame.addAssociations();
+
 			} catch (Exception e1) {
 				e1.getMessage();
 			}

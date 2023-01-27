@@ -33,10 +33,13 @@ public class Draw extends JPanel {
 		            g2d.setStroke(dashed);
 		            g2d.drawLine(a.getX1(), a.getY1(), a.getX2(), a.getY2());
 		            g2d.dispose(); //gets rid of the copy
+				} else if (a.getType().equals("inheritance")) {
+					int x[] = { a.getX2(), a.getX2()-10, a.getX2()+10};
+			        int y[] = { a.getY2(), a.getY2()+10, a.getY2()+10};
+					g.drawPolygon(x, y, 3);
+					g.drawLine(a.getX1(), a.getY1(), a.getX2(), a.getY2()+10);
 				} else {
 					g.drawLine(a.getX1(), a.getY1(), a.getX2(), a.getY2());
-					
-					System.out.println("executed");
 				}
 			}
 		}

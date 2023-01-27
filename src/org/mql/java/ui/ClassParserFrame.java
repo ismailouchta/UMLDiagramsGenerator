@@ -34,6 +34,7 @@ public class ClassParserFrame extends JFrame {
 		content = new JPanel();
 		utils = new JPanel();
 		draw = new Draw();
+
 		init();
 		showF();
 	}
@@ -264,11 +265,21 @@ public class ClassParserFrame extends JFrame {
 				String type = separated[1];
 				
 				int top1 = (int) a.getBounds().getWidth() / 2;
-				int top2 = (int) a.getBounds().getWidth() / 2;
+				int top2 = top1;
+				if (b != null) {					
+					top2 = (int) b.getBounds().getWidth() / 2;
+				}
 				
-				if (a != null && b != null)
-					associations.add(new Association(a.getX() + top1,
-							a.getY(), b.getX() + top2, b.getY(), type));
+				if (a != null && b != null) {
+					if (type.equals("inheritance")) {
+						int bot2 = (int) b.getBounds().getHeight();
+						associations.add(new Association(a.getX() + top1,
+								a.getY(), b.getX() + top2, b.getY() + bot2, type));
+					} else {
+						associations.add(new Association(a.getX() + top1,
+								a.getY(), b.getX() + top2, b.getY(), type));						
+					}
+				}
 			}
 			draw.setAssociations(associations);
 			
